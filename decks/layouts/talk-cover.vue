@@ -1,7 +1,13 @@
 <template>
   <div class="slidev-layout talk-cover">
     <div class="talk-cover__inner">
-      <slot />
+      <div class="talk-cover__space" />
+      <div class="talk-cover__caption">
+        <slot name="caption" />
+      </div>
+      <div class="talk-cover__info">
+        <slot name="info" />
+      </div>
     </div>
     <div class="talk-cover__corner" />
     <div class="talk-cover__pageno"><SlideCurrentNo /></div>
@@ -22,21 +28,43 @@
   text-align: center;
   overflow: hidden;
 }
+.slidev-layout h1 + p {
+  /* override */
+  margin: 0;
+  opacity: 1;
+}
+
 .talk-cover__inner {
+  height: 100%;
   width: 100%;
   padding: 0 6%;
+  display: flex;
+  flex-direction: column;
+}
+.talk-cover__space {
+  height: 30%;
+}
+.talk-cover__caption {
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.talk-cover__info {
+  height: 40%;
 }
 .talk-cover h1 {
   color: #ffffff;
   font-weight: 700;
   font-size: 3.2rem;
   line-height: 1.25;
-  margin: 0 0 2.2rem;
+  margin: 0;
   letter-spacing: 0.01em;
 }
 .talk-cover p {
   color: rgba(255, 255, 255, 0.92);
-  font-size: 1.05rem;
+  font-size: 1.40rem;
   line-height: 1.9;
   margin: 0;
 }

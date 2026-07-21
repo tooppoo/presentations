@@ -13,13 +13,26 @@ mdc: true
 layout: talk-cover
 ---
 
+::caption::
+
 # Bun ではじめる standalone CLI
 
-hokkaido.js vol.07
+::info::
 
 2026-07-21
 
+hokkaido.js vol.07
+
+<span class="hash">#hokkaido_js</span>
+
 @Philomagi
+
+<style scoped>
+  .hash {
+    color: cyan;
+    text-decoration: underline;
+  }
+</style>
 
 ---
 layout: talk-content
