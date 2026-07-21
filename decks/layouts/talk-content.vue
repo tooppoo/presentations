@@ -1,7 +1,7 @@
 <template>
   <div class="slidev-layout talk-content">
     <slot />
-    <div class="talk-content__pageno"><SlideCurrentNo /></div>
+    <PageNumber />
   </div>
 </template>
 
@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
   --slidev-code-font-size: 18px;
   --slidev-code-line-height: 1.62;
 }
@@ -36,7 +37,7 @@
 }
 
 /* 本文領域 */
-.talk-content > :not(h1):not(.talk-content__pageno) {
+.talk-content > :not(h1) {
   padding-left: 3.4rem;
   padding-right: 3.4rem;
 }
@@ -47,8 +48,6 @@
 
 .talk-content ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 .talk-content ul li {
   position: relative;
@@ -126,12 +125,5 @@
   background: transparent !important;
   padding: 0 !important;
   border-radius: 0;
-}
-.talk-content__pageno {
-  position: absolute;
-  right: 14px;
-  bottom: 8px;
-  font-size: 0.8rem;
-  color: #9a9a9a;
 }
 </style>

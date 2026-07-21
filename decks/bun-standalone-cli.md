@@ -35,15 +35,8 @@ hokkaido.js vol.07
 </style>
 
 ---
-layout: talk-content
+src: ./pages/profile.md
 ---
-
-# 発表者
-
-- @Philomagi
-- WEB系プログラマ
-- 自称フロントエンド寄り
-- 最近は Rust とか Go とか
 
 ---
 layout: talk-content

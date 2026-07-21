@@ -1,7 +1,7 @@
 <template>
   <div class="slidev-layout talk-diagram">
     <slot />
-    <div class="talk-diagram__pageno"><SlideCurrentNo /></div>
+    <PageNumber />
   </div>
 </template>
 
@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 /* 上部の細い青ヘッダー帯（番号付きタイトル） */
@@ -35,7 +36,7 @@
 }
 
 /* 図の領域 */
-.talk-diagram > :not(h1):not(.talk-diagram__pageno) {
+.talk-diagram > :not(h1) {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -109,12 +110,5 @@
   font-size: 1.12rem;
   color: #666666;
   text-align: center;
-}
-.talk-diagram__pageno {
-  position: absolute;
-  right: 14px;
-  bottom: 8px;
-  font-size: 0.8rem;
-  color: #9a9a9a;
 }
 </style>
