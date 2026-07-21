@@ -5,6 +5,8 @@
 .codex
 
 # node
+export/
+dist/
 .pnpm-store
 node_modules/
 

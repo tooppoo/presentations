@@ -20,7 +20,8 @@
       "extensions": [
         "EditorConfig.EditorConfig",
         "antfu.slidev",
-        "Vue.volar"
+        "Vue.volar",
+        "sclu1034.justfile"
       ],
       "settings": {
         "editor.formatOnSave": true,
