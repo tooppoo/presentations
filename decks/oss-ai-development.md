@@ -149,6 +149,39 @@ AIの出力そのものを完全に決定論化する、という話ではない
 -->
 
 ---
+layout: talk-diagram
+---
+
+# 問題を分け、それぞれに道具を作る
+
+<div class="flex flex-col items-center" style="gap:0.5rem;">
+  <div class="prow"><div class="dbox dbox--sm pbox">生成物が正しいか、外部から確かめる</div><div class="darrow">→</div><span class="dtag dtag--bun ptool">reportage</span></div>
+  <div class="prow"><div class="dbox dbox--sm pbox">並行作業の衝突を防ぐ</div><div class="darrow">→</div><span class="dtag dtag--bun ptool">git-kura</span></div>
+  <div class="prow"><div class="dbox dbox--sm pbox">生成を、同じ入力で同じ結果にする</div><div class="darrow">→</div><span class="dtag dtag--bun ptool">installerer</span></div>
+  <div class="prow"><div class="dbox dbox--sm pbox">何を公開するかの判断を残す</div><div class="darrow">→</div><span class="dtag dtag--reuse ptool">rellog</span></div>
+</div>
+
+<div class="dcaption" style="margin-top:1.1rem;">
+
+> ファジーな判断は残し、決定論的に固められる部分を切り出して道具にした
+
+</div>
+
+<style scoped>
+.prow { display: flex; align-items: center; gap: 0.9rem; }
+.prow .pbox { width: 26rem; justify-content: flex-start; text-align: left; padding-left: 1rem; white-space: normal; }
+.prow .ptool { width: 8.5rem; text-align: center; flex: 0 0 auto; font-size: 1rem; }
+.prow .darrow { flex: 0 0 auto; }
+</style>
+
+<!--
+6ページ目までの問題への「どう対処したか」を、ここで一度整理する。
+問題を分け、決定論的に固められる部分を切り出して、それぞれに道具を作った。
+このあと各ツールを、この対応づけの順に詳しく見る。
+rellog だけは灰色タグ（判断を人間に残す側）で区別している。
+-->
+
+---
 layout: talk-content
 ---
 
