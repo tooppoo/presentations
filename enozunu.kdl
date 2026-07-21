@@ -2,6 +2,13 @@
 enozunu config-version=1 {
   provider {
     skills {
+      skill "subagent-review-loop" {
+        git {
+          url "https://github.com/tooppoo/catalog-agent-tools"
+          branch "main"
+          path "common/skills/subagent-review-loop"
+        }
+      }
       skill "slidev" {
         git {
           url "https://github.com/slidevjs/slidev"
@@ -21,11 +28,11 @@ enozunu config-version=1 {
 
   consumer {
     claude {
-      use-skills "slidev" "japanese-note"
+      use-skills "slidev" "japanese-note" "subagent-review-loop"
     }
 
     codex {
-      use-skills "slidev" "japanese-note"
+      use-skills "slidev" "japanese-note" "subagent-review-loop"
     }
   }
 }
