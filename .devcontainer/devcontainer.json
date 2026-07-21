@@ -19,7 +19,8 @@
     "vscode": {
       "extensions": [
         "EditorConfig.EditorConfig",
-        "antfu.slidev"
+        "antfu.slidev",
+        "Vue.volar"
       ],
       "settings": {
         "editor.formatOnSave": true,

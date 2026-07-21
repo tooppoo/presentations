@@ -9,13 +9,8 @@
 .gitignore text eol=lf
 .editorconfig text eol=lf
 
-# Go
-*.go text eol=lf
-go.mod text eol=lf
-go.sum text eol=lf
-
-# Rust
-*.rs text eol=lf
+# vue
+*.vue text eol=lf
 
 # Configuration and data files
 *.json text eol=lf

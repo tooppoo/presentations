@@ -1,5 +1,15 @@
 
+# ai
+.claude
+.agents
+.codex
+
 # node
 .pnpm-store
 node_modules/
 
+# editor
+.vscode/
+
+# other
+tmp/

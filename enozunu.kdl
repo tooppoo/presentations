@@ -1,0 +1,48 @@
+
+enozunu config-version=1 {
+  provider {
+    skills {
+      skill "subagent-review-loop" {
+        git {
+          url "https://github.com/tooppoo/catalog-agent-tools"
+          branch "main"
+          path "common/skills/subagent-review-loop"
+        }
+      }
+      skill "slidev" {
+        git {
+          url "https://github.com/slidevjs/slidev"
+          branch "main"
+          path "skills/slidev"
+        }
+      }
+      skill "japanese-note" {
+        gist {
+          id "fd287c3133457c4fd8f5601d34aa817d"
+          revision "209db7d6d19bc4727139844c0e8d786542e9ff68"
+        }
+      }
+    }
+
+    agents {
+      agent "slidev-design-reviewer" {
+        git {
+          url "https://github.com/tooppoo/catalog-agent-tools"
+          branch "main"
+          path "presentation/agents/slidev-design-reviewer.md"
+        }
+      }
+    }
+  }
+
+  consumer {
+    claude {
+      use-skills "slidev" "japanese-note" "subagent-review-loop"
+      use-agents "slidev-design-reviewer"
+    }
+
+    codex {
+      use-skills "slidev" "japanese-note" "subagent-review-loop"
+    }
+  }
+}

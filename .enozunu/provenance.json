@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "source_name": "slidev",
+      "kind": "skill",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/slidevjs/slidev",
+        "branch": "main",
+        "path": "skills/slidev",
+        "resolved_revision": "97c9c89f7c2dfd5668467f125ebd4fa4e7776b23"
+      },
+      "target_ai": "claude",
+      "target_path": ".claude/skills/slidev"
+    },
+    {
+      "source_name": "japanese-note",
+      "kind": "skill",
+      "source": {
+        "type": "gist",
+        "id": "fd287c3133457c4fd8f5601d34aa817d",
+        "revision": "209db7d6d19bc4727139844c0e8d786542e9ff68"
+      },
+      "target_ai": "claude",
+      "target_path": ".claude/skills/japanese-note"
+    },
+    {
+      "source_name": "subagent-review-loop",
+      "kind": "skill",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/tooppoo/catalog-agent-tools",
+        "branch": "main",
+        "path": "common/skills/subagent-review-loop",
+        "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
+      },
+      "target_ai": "claude",
+      "target_path": ".claude/skills/subagent-review-loop"
+    },
+    {
+      "source_name": "slidev-design-reviewer",
+      "kind": "agent",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/tooppoo/catalog-agent-tools",
+        "branch": "main",
+        "path": "presentation/agents/slidev-design-reviewer.md",
+        "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
+      },
+      "target_ai": "claude",
+      "target_path": ".claude/agents/slidev-design-reviewer.md"
+    },
+    {
+      "source_name": "slidev",
+      "kind": "skill",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/slidevjs/slidev",
+        "branch": "main",
+        "path": "skills/slidev",
+        "resolved_revision": "97c9c89f7c2dfd5668467f125ebd4fa4e7776b23"
+      },
+      "target_ai": "codex",
+      "target_path": ".agents/skills/slidev"
+    },
+    {
+      "source_name": "japanese-note",
+      "kind": "skill",
+      "source": {
+        "type": "gist",
+        "id": "fd287c3133457c4fd8f5601d34aa817d",
+        "revision": "209db7d6d19bc4727139844c0e8d786542e9ff68"
+      },
+      "target_ai": "codex",
+      "target_path": ".agents/skills/japanese-note"
+    },
+    {
+      "source_name": "subagent-review-loop",
+      "kind": "skill",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/tooppoo/catalog-agent-tools",
+        "branch": "main",
+        "path": "common/skills/subagent-review-loop",
+        "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
+      },
+      "target_ai": "codex",
+      "target_path": ".agents/skills/subagent-review-loop"
+    },
+    {
+      "source_name": "slidev-design-reviewer",
+      "kind": "agent",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/tooppoo/catalog-agent-tools",
+        "branch": "main",
+        "path": "presentation/agents/slidev-design-reviewer.md",
+        "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
+      },
+      "target_ai": "codex",
+      "target_path": ".codex/agents/slidev-design-reviewer.toml"
+    }
+  ]
+}
