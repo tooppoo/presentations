@@ -79,16 +79,23 @@ layout: talk-diagram
 # Web UI と CLI は core を共有する
 
 <div class="dbody">
-  <div class="flex items-center gap-8">
-    <div class="flex flex-col gap-5">
+  <div class="flex items-center gap-12">
+    <div class="flex flex-col gap-6">
       <div class="dbox">Web UI</div>
       <div class="dbox">CLI（追加）</div>
     </div>
-    <div class="darrow">→</div>
-    <div class="dbox dbox--accent" style="padding:1.1rem 1.5rem;">runtime-neutral<br>shared core</div>
+    <div class="darrow s5arrow">→</div>
+    <div class="dbox dbox--accent s5core">runtime-neutral<br>shared core</div>
   </div>
   <div class="dcaption">Web UI はそのまま残り、CLI を追加した</div>
 </div>
+
+<style scoped>
+.talk-diagram .dbox { font-size: 1.5rem; padding: 1rem 1.7rem; }
+.talk-diagram .s5core { padding: 1.4rem 1.9rem; line-height: 1.4; }
+.talk-diagram .s5arrow { font-size: 2.6rem; }
+.talk-diagram .dcaption { font-size: 1.32rem; margin-top: 2.4rem; }
+</style>
 
 <!--
 「WebアプリをCLIへ変換した」「移行した」ではない。共有coreの上に両方が乗る。
@@ -134,7 +141,7 @@ layout: talk-content
 
 # 最小例
 
-```bash
+```bash {1-2}
 bun build --compile \
   --target=bun-linux-x64-baseline \
   --outfile=installerer \
@@ -147,7 +154,11 @@ bun build --compile \
 ./installerer --version
 ```
 
-<div class="text-1rem text-#8a8a8a mt-4">※ ライブデモは行わず、コマンドと結果のみ示す</div>
+<div class="text-1.05rem text-#8a8a8a mt-5">※ ライブデモは行わず、コマンドと結果のみ示す</div>
+
+<style scoped>
+.talk-content > :not(h1):first-of-type { margin-top: 2.4rem; }
+</style>
 
 ---
 layout: talk-content
@@ -218,18 +229,18 @@ layout: talk-diagram
 
 # compile の先にあるもの
 
-<div class="dbody" style="gap:0.9rem;">
-  <div class="flex items-center gap-3">
-    <span class="dtag dtag--bun" style="width:9rem;text-align:center;">Bun 固有</span>
+<div class="dbody" style="gap:0.55rem;">
+  <div class="s12row flex items-center justify-start gap-3">
+    <span class="dtag dtag--bun" style="width:9.5rem;text-align:center;">Bun 固有</span>
     <div class="dbox dbox--sm">TypeScript</div>
     <div class="darrow">→</div>
     <div class="dbox dbox--sm">bun build --compile</div>
     <div class="darrow">→</div>
     <div class="dbox dbox--accent dbox--sm">target 別 binary</div>
   </div>
-  <div class="darrow" style="font-size:1.4rem;">↓</div>
-  <div class="flex items-center gap-3">
-    <span class="dtag dtag--reuse" style="width:9rem;text-align:center;">reusable workflow</span>
+  <div class="darrow" style="font-size:1.5rem;">↓</div>
+  <div class="s12row flex items-center justify-start gap-3">
+    <span class="dtag dtag--reuse" style="width:9.5rem;text-align:center;">reusable workflow</span>
     <div class="dbox dbox--sm">native runner 確認</div>
     <div class="darrow">→</div>
     <div class="dbox dbox--sm">archive + checksum</div>
@@ -238,8 +249,13 @@ layout: talk-diagram
     <div class="darrow">→</div>
     <div class="dbox dbox--sm">install.sh</div>
   </div>
-  <div class="dcaption">single binary の生成は簡単。その先の配布設計が別途必要になる</div>
+  <div class="dcaption" style="margin-top:1.4rem;">single binary の生成は簡単。その先の配布設計が別途必要になる</div>
 </div>
+
+<style scoped>
+.talk-diagram .s12row { width: 100%; max-width: 860px; }
+.talk-diagram .darrow { color: #9aa3b2; }
+</style>
 
 <!--
 single binaryの生成は簡単。だがその先の配布設計が別途必要になる。

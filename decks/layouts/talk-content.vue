@@ -15,6 +15,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  --slidev-code-font-size: 18px;
+  --slidev-code-line-height: 1.62;
 }
 
 /* 上部の青ヘッダー帯（最初の見出しを帯にする） */
@@ -111,7 +113,9 @@
 }
 .talk-content pre {
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-size: 1.18rem;
+  line-height: 1.62;
+  padding: 0.9rem 1.1rem;
   margin: 0.6em 0;
 }
 .talk-content__pageno {
