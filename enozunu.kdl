@@ -25,7 +25,7 @@ enozunu config-version=1 {
     }
 
     agents {
-      agent "design-reviewer" {
+      agent "slidev-design-reviewer" {
         git {
           url "https://github.com/tooppoo/catalog-agent-tools"
           branch "main"
@@ -38,7 +38,7 @@ enozunu config-version=1 {
   consumer {
     claude {
       use-skills "slidev" "japanese-note" "subagent-review-loop"
-      use-agents "design-reviewer"
+      use-agents "slidev-design-reviewer"
     }
 
     codex {

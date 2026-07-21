@@ -2,6 +2,7 @@
 # ai
 .claude
 .agents
+.codex
 
 # node
 .pnpm-store

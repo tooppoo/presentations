@@ -39,7 +39,7 @@
       "target_path": ".claude/skills/subagent-review-loop"
     },
     {
-      "source_name": "design-reviewer",
+      "source_name": "slidev-design-reviewer",
       "kind": "agent",
       "source": {
         "type": "git",
@@ -49,7 +49,7 @@
         "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
       },
       "target_ai": "claude",
-      "target_path": ".claude/agents/design-reviewer.md"
+      "target_path": ".claude/agents/slidev-design-reviewer.md"
     },
     {
       "source_name": "slidev",
@@ -87,6 +87,19 @@
       },
       "target_ai": "codex",
       "target_path": ".agents/skills/subagent-review-loop"
+    },
+    {
+      "source_name": "slidev-design-reviewer",
+      "kind": "agent",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/tooppoo/catalog-agent-tools",
+        "branch": "main",
+        "path": "presentation/agents/slidev-design-reviewer.md",
+        "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
+      },
+      "target_ai": "codex",
+      "target_path": ".codex/agents/slidev-design-reviewer.toml"
     }
   ]
 }
