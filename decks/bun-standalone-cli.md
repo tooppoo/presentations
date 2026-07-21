@@ -55,7 +55,7 @@ TypeScript でCLIを書けても、配布した先の利用者にランタイム
 layout: talk-content
 ---
 
-# installerer とは
+# installerer について
 
 <v-clicks>
 
@@ -73,7 +73,7 @@ layout: talk-content
 layout: talk-diagram
 ---
 
-# Web UI と CLI は core を共有する
+# Web UI / CLI / core の関係
 
 <div class="dbody">
   <div class="flex items-center gap-12">
@@ -82,7 +82,7 @@ layout: talk-diagram
       <div class="dbox">CLI（追加）</div>
     </div>
     <div class="darrow s5arrow">→</div>
-    <div class="dbox dbox--accent s5core">runtime-neutral<br>shared core</div>
+    <div class="dbox dbox--accent s5core">shared core<br>（ランタイム中立）</div>
   </div>
   <div class="dcaption">Web UI はそのまま、CLI を追加</div>
 </div>
@@ -148,6 +148,13 @@ bun build --compile \
 ./installerer --version
 ```
 
+<v-clicks>
+
+- `--compile` で single binary を生成
+- `--target` で対象とするOS・アーキテクチャを指定できる
+
+</v-clicks>
+
 ---
 layout: talk-content
 ---
@@ -183,6 +190,7 @@ layout: talk-content
   - 利用者が `installerer` のためだけに runtime を入れなくて良い
 - npm 版は Node.js CLI として作る = Node.js runtime 前提
   - npm を使っているから、Node.js runtime を前提にして問題ない
+  - runtime 同梱を回避
 
 </v-clicks>
 
@@ -216,22 +224,21 @@ layout: talk-diagram
 layout: talk-diagram
 ---
 
-# compile の先にあるもの
+# single binaryの配布ルート
 
 <div class="dbody" style="gap:0.7rem;">
 
   <div class="s12panel">
-    <div class="s12panel__title">reusable workflow（言語非依存）／ target 別に native runner で実行</div>
+    <div class="s12panel__title">target 別に native runner で実行</div>
     <div class="flex items-center justify-center gap-2 flex-wrap">
       <div class="dbox dbox--accent dbox--sm s12build">
-        build script
-        <span class="s12sub">bun build --compile</span>
+        <span>bun build --compile</span>
         <span class="s12badge">Bun 固有</span>
       </div>
       <div class="darrow">→</div>
       <div class="dbox dbox--sm">target 別 binary</div>
       <div class="darrow">→</div>
-      <div class="dbox dbox--sm">archive (tar.gz / zip)</div>
+      <div class="dbox dbox--sm">archive (tar.gz)</div>
       <div class="darrow">→</div>
       <div class="dbox dbox--sm">sha256 checksum</div>
     </div>
@@ -240,15 +247,16 @@ layout: talk-diagram
   <div class="darrow" style="font-size:1.4rem;">↓</div>
 
   <div class="s12row flex items-center justify-center gap-3">
-    <span class="dtag dtag--reuse" style="width:6.5rem;text-align:center;">公開・配布</span>
-    <div class="dbox dbox--sm s12col">release.yml<span class="s12sub">tag = version 確認</span></div>
+    <div class="dbox dbox--sm s12col">release.yml</div>
     <div class="darrow">→</div>
     <div class="dbox dbox--sm s12col">GitHub Release<span class="s12sub">archive + checksum</span></div>
     <div class="darrow">→</div>
     <div class="dbox dbox--sm">install.sh で導入</div>
+    <div class="darrow">→</div>
+    <div class="dbox dbox--sm">binaryを<br>GitHub Releaseから<br>ダウンロード</div>
   </div>
 
-  <div class="dcaption" style="margin-top:1.2rem;">Bun 固有は build script のみ。target 別 runner・archive・checksum・smoke test は言語非依存の reusable workflow へ委譲</div>
+  <div class="dcaption" style="margin-top:1.2rem;">Bun 固有は build script のみ</div>
 </div>
 
 <style scoped>
@@ -297,28 +305,7 @@ GitHub Releaseの公開はrelease.ymlのpublishジョブ、smoke testはwf-insta
 layout: talk-content
 ---
 
-# release workflow の経緯
-
-<v-clicks>
-
-- multi-runner は Bun の制約から生じたわけではない
-- Rust 製 CLI の release で target 別 native runner が必要だった
-- その release を reusable workflow として共通化した
-- Bun 製 CLI も同じ workflow に載せた
-
-</v-clicks>
-
-<div v-click>
-
-> cross-platform release の複雑性を、各 repository から共通 workflow へ局所化した
-
-</div>
-
----
-layout: talk-content
----
-
-# trade-off
+# トレードオフ
 
 <div class="flex flex-col items-center gap-2 mt-2 text-1.28rem">
   <div class="dbox dbox--soft" style="background:#eef2fb;border:1.5px solid #b7c8ec;border-radius:10px;padding:0.7rem 1.2rem;color:#35507f;font-weight:600;">利用者側の runtime 依存をなくす</div>
@@ -326,9 +313,12 @@ layout: talk-content
   <div class="dbox" style="background:#fff;border:1.5px solid #d2d7e0;border-radius:10px;padding:0.7rem 1.2rem;color:#4b4b4b;font-weight:600;">runtime 同梱で binary は大きくなりやすい</div>
 </div>
 
-<div v-click class="text-center mt-6 text-1.15rem text-#666">
-欠点として隠さず、trade-off として示す
-</div>
+<v-clicks>
+
+- 配布時のサイズを取るか、可搬性を取るか
+- 基本は single binary で配布、サイズを最小化したいなら npm 経由、という棲み分けもあり得るかも
+
+</v-clicks>
 
 ---
 layout: talk-content
@@ -338,18 +328,13 @@ layout: talk-content
 
 <v-clicks>
 
-- single binary の生成自体は比較的簡単
-- その先の配布設計（target 別 binary / archive / checksum / smoke test）が本題
-- 複雑性は reusable workflow へ局所化できる
+- Bunを使うと、single binary の生成自体は比較的簡単
+- single binary とのトレードオフとして、バイナリ本体のサイズ増大がある
 
 </v-clicks>
 
 <div v-click class="mt-2">
 
-> Node.js runtime を利用者へ求めたくない場合、Bun single binary は有力な選択肢
+> Node.js runtime を利用者へ強制したくない場合、Bun single binary は有力な選択肢
 
-</div>
-
-<div v-click class="text-1rem text-#8a8a8a mt-3">
-すべての Node.js CLI に対する第一選択とは主張しない
 </div>
