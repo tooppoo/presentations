@@ -218,36 +218,79 @@ layout: talk-diagram
 
 # compile の先にあるもの
 
-<div class="dbody" style="gap:0.55rem;">
-  <div class="s12row flex items-center justify-start gap-3">
-    <span class="dtag dtag--bun" style="width:9.5rem;text-align:center;">Bun 固有</span>
-    <div class="dbox dbox--sm">TypeScript</div>
-    <div class="darrow">→</div>
-    <div class="dbox dbox--sm">bun build --compile</div>
-    <div class="darrow">→</div>
-    <div class="dbox dbox--accent dbox--sm">target 別 binary</div>
+<div class="dbody" style="gap:0.7rem;">
+
+  <div class="s12panel">
+    <div class="s12panel__title">reusable workflow（言語非依存）／ target 別に native runner で実行</div>
+    <div class="flex items-center justify-center gap-2 flex-wrap">
+      <div class="dbox dbox--accent dbox--sm s12build">
+        build script
+        <span class="s12sub">bun build --compile</span>
+        <span class="s12badge">Bun 固有</span>
+      </div>
+      <div class="darrow">→</div>
+      <div class="dbox dbox--sm">target 別 binary</div>
+      <div class="darrow">→</div>
+      <div class="dbox dbox--sm">archive (tar.gz / zip)</div>
+      <div class="darrow">→</div>
+      <div class="dbox dbox--sm">sha256 checksum</div>
+    </div>
   </div>
-  <div class="darrow" style="font-size:1.5rem;">↓</div>
-  <div class="s12row flex items-center justify-start gap-3">
-    <span class="dtag dtag--reuse" style="width:9.5rem;text-align:center;">reusable workflow</span>
-    <div class="dbox dbox--sm">native runner 確認</div>
+
+  <div class="darrow" style="font-size:1.4rem;">↓</div>
+
+  <div class="s12row flex items-center justify-center gap-3">
+    <span class="dtag dtag--reuse" style="width:6.5rem;text-align:center;">公開・配布</span>
+    <div class="dbox dbox--sm s12col">release.yml<span class="s12sub">tag = version 確認</span></div>
     <div class="darrow">→</div>
-    <div class="dbox dbox--sm">archive + checksum</div>
+    <div class="dbox dbox--sm s12col">GitHub Release<span class="s12sub">archive + checksum</span></div>
     <div class="darrow">→</div>
-    <div class="dbox dbox--sm">GitHub Releases</div>
-    <div class="darrow">→</div>
-    <div class="dbox dbox--sm">install.sh</div>
+    <div class="dbox dbox--sm">install.sh で導入</div>
   </div>
-  <div class="dcaption" style="margin-top:1.4rem;">single binary の生成は簡単。その先の配布設計が別途必要になる</div>
+
+  <div class="dcaption" style="margin-top:1.2rem;">Bun 固有は build script のみ。target 別 runner・archive・checksum・smoke test は言語非依存の reusable workflow へ委譲</div>
 </div>
 
 <style scoped>
-.talk-diagram .s12row { width: 100%; max-width: 860px; }
+.talk-diagram .s12panel {
+  border: 1.5px dashed #b7ceff;
+  background: #f5f9ff;
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem 1rem;
+}
+.talk-diagram .s12panel__title {
+  font-size: 0.95rem;
+  color: #2f66c8;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+.talk-diagram .s12build { flex-direction: column; gap: 0.15rem; line-height: 1.25; padding: 0.6rem 1rem; }
+.talk-diagram .s12col { flex-direction: column; gap: 0.05rem; line-height: 1.2; }
+.talk-diagram .s12sub {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+.talk-diagram .s12badge {
+  display: inline-block;
+  margin-top: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #ffffff;
+  color: #2f66c8;
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+}
+.talk-diagram .s12row { width: 100%; max-width: 820px; }
 .talk-diagram .darrow { color: #9aa3b2; }
+.talk-diagram .dbox .s12sub { color: #7a7a7a; }
 </style>
 
 <!--
-single binaryの生成は簡単。だがその先の配布設計が別途必要になる。
+Bun固有なのはbuild scriptまで。target別runner・archive・checksum・smoke testは言語非依存のreusable workflowへ委譲した。
+GitHub Releaseの公開はrelease.ymlのpublishジョブ、smoke testはwf-installer-smoke-test（CIでinstall.shを検証）。
 -->
 
 ---
