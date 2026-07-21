@@ -164,7 +164,7 @@ layout: talk-content
 
 <div v-click>
 
-> 既に Bun を使う TypeScript プロジェクトなら、single binary CLI を既存 toolchain の延長として追加できる
+> Bun を使う TypeScript プロジェクトなら、single binary CLI を既存 toolchain の延長として追加しやすい
 
 </div>
 
@@ -172,16 +172,17 @@ layout: talk-content
 layout: talk-content
 ---
 
-# 2つの runtime を混同しない
+# runtime との距離
 
 <v-clicks>
 
-- **shared core の runtime-neutrality**
-  - Node.js / Bun / ブラウザ固有 API に依存しない
-- **配布 binary の runtime 不要性**
+- **shared core はランタイム中立**
+  - 共通のコア部分は Node.js / Bun / ブラウザ固有 API に依存しない
+- **配布 binary は別途 runtime を求めない**
   - Bun runtime は binary の中に同梱される
-  - 利用者が別途インストール・管理する必要がない
-- npm 版は Node.js CLI なので runtime 非依存ではない
+  - 利用者が `installerer` のためだけに runtime を入れなくて良い
+- npm 版は Node.js CLI として作る = Node.js runtime 前提
+  - npm を使っているから、Node.js runtime を前提にして問題ない
 
 </v-clicks>
 
@@ -198,15 +199,15 @@ layout: talk-diagram
       <div class="darrow">↓</div>
       <div class="dbox dbox--sm">bundle → npm package</div>
       <div class="darrow">↓</div>
-      <div class="dbox dbox--sm">Node.js で実行</div>
-      <div class="dtag dtag--reuse mt-1">補助チャネル</div>
+      <div class="dbox dbox--sm">Node.js script</div>
+      <div class="dtag dtag--reuse mt-1">補助の配布ルート</div>
     </div>
     <div class="flex flex-col items-center gap-2">
       <div class="darrow">↓</div>
       <div class="dbox dbox--sm">Bun compile</div>
       <div class="darrow">↓</div>
       <div class="dbox dbox--accent dbox--sm">standalone binary</div>
-      <div class="dtag dtag--bun mt-1">カノニカルな配布物</div>
+      <div class="dtag dtag--bun mt-1">メインの配布ルート</div>
     </div>
   </div>
 </div>
