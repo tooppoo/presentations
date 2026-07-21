@@ -33,10 +33,23 @@
         "url": "https://github.com/tooppoo/catalog-agent-tools",
         "branch": "main",
         "path": "common/skills/subagent-review-loop",
-        "resolved_revision": "3cac0ce2540a6052fea4e5a86af236c49ebf066d"
+        "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
       },
       "target_ai": "claude",
       "target_path": ".claude/skills/subagent-review-loop"
+    },
+    {
+      "source_name": "design-reviewer",
+      "kind": "agent",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/tooppoo/catalog-agent-tools",
+        "branch": "main",
+        "path": "presentation/agents/slidev-design-reviewer.md",
+        "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
+      },
+      "target_ai": "claude",
+      "target_path": ".claude/agents/design-reviewer.md"
     },
     {
       "source_name": "slidev",
@@ -70,7 +83,7 @@
         "url": "https://github.com/tooppoo/catalog-agent-tools",
         "branch": "main",
         "path": "common/skills/subagent-review-loop",
-        "resolved_revision": "3cac0ce2540a6052fea4e5a86af236c49ebf066d"
+        "resolved_revision": "a23446fe66747d5f79194dcb566a9a8c69380507"
       },
       "target_ai": "codex",
       "target_path": ".agents/skills/subagent-review-loop"
