@@ -104,19 +104,28 @@
   font-size: 1.16rem;
   line-height: 1.55;
 }
-.talk-content code {
+/* インライン code のみ pill 装飾（pre 内の code には付けない） */
+.talk-content :not(pre) > code {
   background: #e7e9ee;
-  color: #365; /* fallback */
+  color: #3a6fd0;
   border-radius: 4px;
   padding: 0.08em 0.35em;
   font-size: 0.92em;
 }
+/* code block はブロック全体で一つの背景にする */
 .talk-content pre {
+  background-color: #eceef3 !important;
   border-radius: 8px;
   font-size: 1.18rem;
   line-height: 1.62;
-  padding: 0.9rem 1.1rem;
+  padding: 1rem 1.2rem;
   margin: 0.6em 0;
+}
+.talk-content pre code {
+  display: block;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0;
 }
 .talk-content__pageno {
   position: absolute;
