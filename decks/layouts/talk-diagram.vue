@@ -107,8 +107,11 @@
 }
 .talk-diagram .dcaption {
   margin-top: 1.6rem;
-  font-size: 1.12rem;
+  font-size: 1.15rem;
   color: #666666;
   text-align: center;
+}
+.talk-diagram blockquote {
+  font-size: 1.16rem;
 }
 </style>

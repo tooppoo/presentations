@@ -41,9 +41,8 @@
   padding-left: 3.4rem;
   padding-right: 3.4rem;
 }
-.talk-content > :not(h1):first-of-type,
-.talk-content > h1 + * {
-  margin-top: 1.7rem;
+.talk-content > :not(h1):first-of-type {
+  margin-top: 1.2rem;
 }
 
 .talk-content ul {
@@ -98,8 +97,8 @@
   border-left: 4px solid #9db8e8;
   background: #eef2fb;
   color: #4f4f4f;
-  margin: 0.8em 0;
-  padding: 0.55em 1.1em;
+  margin: 0;
+  padding: 0em 1.1em;
   font-size: 1.16rem;
   line-height: 1.55;
 }
