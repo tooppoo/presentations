@@ -47,7 +47,7 @@ layout: talk-content
 
 - Claude や Codex を使い、個人でも複数のOSSを並行して開発できた
 - コードを書くこと自体の負荷は下がった
-- 代わりに、別の問いが重くなった
+- 実装レイヤの代わりに、違うレイヤの負荷が大きくなりつつある
 
 </v-clicks>
 
@@ -61,19 +61,19 @@ layout: talk-content
 layout: talk-content
 ---
 
-# コードより重くなった問い
+# 負荷の比重が大きくなったレイヤ
 
 <v-clicks>
 
 - 何を作り、何をIssueとして固定するのか
 - 複数エージェントの作業をどう分離するのか
-- 生成された実装が正しいかを、どう確かめるのか
+- **生成された実装が正しいかを、どう確かめるのか**
 
 </v-clicks>
 
 <div v-click class="text-1rem text-#8a8a8a mt-5">
 
-※ 仕様・作業状態・生成結果の不確実性が、新しいボトルネックになった
+> ※ 仕様・作業状態・生成結果の不確実性が、新しいボトルネックになった
 
 </div>
 
@@ -86,19 +86,19 @@ layout: talk-content
 layout: talk-content
 ---
 
-# 変わった開発スタイル
+# 開発スタイルの変化
 
 <v-clicks>
 
 - 実装は逐語的に読むより、全体構造と危険箇所を確認する
-- E2Eテストや snapshot を重視する
+- E2Eテストや snapshot を分厚くする
 - AIへの依頼を、自然言語だけでなく検証可能な条件へ落とす
 
 </v-clicks>
 
 <div v-click class="mt-3">
 
-> 確認の重心を、実装の逐語確認から、外部挙動・契約・差分・テスト結果へ移した
+> 確認の重心を、実装の逐語的確認から、外部挙動・契約・差分・テスト結果へ移した
 
 </div>
 
@@ -113,10 +113,13 @@ snapshot＝前回の出力との差分を検出する方法。
 layout: talk-diagram
 ---
 
-# ファジーな領域と決定論的な領域
+# 開発における2つの領域
 
 <div class="dbody" style="gap:1.4rem;">
-  <div class="dcaption" style="margin:0 0 0.6rem;font-size:1.05rem;">ファジー＝揺れが残り、人とAIが判断する領域。決定論的＝同じ入力なら同じ結果になる領域。</div>
+  <ul>
+    <li>ファジー＝揺れが残り、同じ入力が必ずしも同じ結果とならない領域</li>
+    <li>決定論的＝同じ入力なら同じ結果になる領域</li>
+  </ul>
   <div class="flex items-stretch justify-center gap-5">
     <div class="dcol">
       <div class="dtag dtag--reuse">ファジー</div>
@@ -133,7 +136,7 @@ layout: talk-diagram
   </div>
   <div class="dcaption" style="margin-top:0.4rem;">
 
-> ファジーな領域を残しつつ、決定論的に扱える領域を増やす
+> ファジーな領域が残ることは受け入れつつ、決定論的に扱える領域を増やす
 
   </div>
 </div>

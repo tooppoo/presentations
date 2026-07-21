@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 
 // #region snippet
 // Inside ./snippets/external.ts
