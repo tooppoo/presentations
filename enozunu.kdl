@@ -1,0 +1,31 @@
+
+enozunu config-version=1 {
+  provider {
+    skills {
+      skill "slidev" {
+        git {
+          url "https://github.com/slidevjs/slidev"
+          branch "main"
+          path "skills/slidev"
+        }
+      }
+      skill "japanese-note" {
+        gist {
+          id "fd287c3133457c4fd8f5601d34aa817d"
+          revision "209db7d6d19bc4727139844c0e8d786542e9ff68"
+
+        }
+      }
+    }
+  }
+
+  consumer {
+    claude {
+      use-skills "slidev" "japanese-note"
+    }
+
+    codex {
+      use-skills "slidev" "japanese-note"
+    }
+  }
+}
