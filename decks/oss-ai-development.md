@@ -157,7 +157,7 @@ layout: talk-diagram
 <div class="flex flex-col items-center" style="gap:0.5rem;">
   <div class="prow"><div class="dbox dbox--sm pbox">生成物が正しいか、外部から確かめる</div><div class="darrow">→</div><span class="dtag dtag--bun ptool">reportage</span></div>
   <div class="prow"><div class="dbox dbox--sm pbox">並行作業の衝突を防ぐ</div><div class="darrow">→</div><span class="dtag dtag--bun ptool">git-kura</span></div>
-  <div class="prow"><div class="dbox dbox--sm pbox">生成を、同じ入力で同じ結果にする</div><div class="darrow">→</div><span class="dtag dtag--bun ptool">installerer</span></div>
+  <div class="prow"><div class="dbox dbox--sm pbox">install.sh を毎回書かずに用意する</div><div class="darrow">→</div><span class="dtag dtag--bun ptool">installerer</span></div>
   <div class="prow"><div class="dbox dbox--sm pbox">何を公開するかの判断を残す</div><div class="darrow">→</div><span class="dtag dtag--reuse ptool">rellog</span></div>
 </div>
 
@@ -252,34 +252,29 @@ git-kuraは要求仕様そのものの曖昧さは解消しない。
 layout: talk-diagram
 ---
 
-# installerer で generator を作る
+# installerer で install.sh を生成する
 
 <div class="dbody" style="gap:0.9rem;">
-  <p class="text-1.15rem text-#6b6b6b" style="margin:0 0 0.6rem;text-align:center;">自作OSSの一つ。CLIを配る際の install スクリプトを生成するツール。</p>
+  <p class="text-1.15rem text-#6b6b6b" style="margin:0 0 0.6rem;text-align:center;">自作OSSの一つ。CLIを配る際の install.sh を、決まった入力から生成するツール。</p>
   <div class="flex items-center gap-4">
-    <div class="dbox dbox--soft dbox--sm">AIに毎回<br>成果物を生成させる</div>
+    <div class="dbox dbox--soft dbox--sm">install.sh を<br>その都度書く</div>
     <div class="darrow">→</div>
-    <div class="dbox dbox--sm">AIと一緒に<br>generator を作る</div>
+    <div class="dbox dbox--sm">配布の規約を<br>入力として宣言する</div>
     <div class="darrow">→</div>
-    <div class="dbox dbox--accent dbox--sm">同じ入力から<br>同じ成果物を生成する</div>
+    <div class="dbox dbox--accent dbox--sm">installerer が<br>install.sh を生成する</div>
   </div>
   <div class="dcaption" style="margin-top:1.2rem;">
 
-> 成果物を毎回生成させず、成果物を決定論的に生成する機械をAIで作る
+> 作るのは install.sh ではなく、それを生む生成器。同じ入力なら同じ結果になる
 
   </div>
 </div>
 
-<div v-click class="text-1rem text-#8a8a8a mt-2 text-center">
-
-※ generator 自体の正しさは自明でない。入力制約と reportage のE2Eで検証する
-
-</div>
-
 <!--
-CLIを作るたびにinstall scriptを繰り返し書くのが面倒だった。
-毎回書かせるのではなく、入力から決定論的にinstallerを生成する。
-generatorの正しさの検証で、reportageと接続する。
+install.sh を CLI ごとに書くのが面倒だった。
+毎回書く代わりに、配布の規約（資産の命名やチェックサム）を入力として宣言し、installerer で install.sh を生成する。
+installerer 自身が生成器で、その正しさは reportage の E2E で確かめる。
+README に AI への言及はない。ここでは「毎回 AI に書かせず、決定論的に生成する」位置づけで扱う。
 -->
 
 ---
