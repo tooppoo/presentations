@@ -161,6 +161,10 @@ layout: talk-diagram
 </style>
 
 ---
+
+![reportage](./assets/oss/reportage.png){style="width:auto; height:450px; margin:auto;"}
+
+---
 layout: talk-content
 ---
 
@@ -192,6 +196,12 @@ AIがどう実装したかではなく、外から観測できる契約を見る
 -->
 
 ---
+comark: true
+---
+
+![git-kura](./assets/oss/git-kura.png){style="width:auto; height:450px; margin:auto;"}
+
+---
 layout: talk-content
 ---
 
@@ -217,6 +227,12 @@ AIが活動する環境を決定論的に管理する。
 worktree＝同じGitリポジトリから複数の独立した作業場所を作る仕組み。
 git-kuraは要求仕様そのものの曖昧さは解消しない。
 -->
+
+---
+comark: true
+---
+
+![installerer](./assets/oss/installerer.png){style="width:auto; height:450px; margin:auto;"}
 
 ---
 layout: talk-content

@@ -58,6 +58,12 @@ TypeScript でCLIを書けても、配布した先の利用者にランタイム
 -->
 
 ---
+comark: true
+---
+
+![screen shot of installerer](./assets/oss/installerer.png){style="width:auto; height:450px; margin:auto;"}
+
+---
 layout: talk-content
 ---
 
