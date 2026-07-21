@@ -154,6 +154,8 @@ layout: talk-content
 
 # reportage で外部挙動を固定する
 
+<p class="text-1.15rem text-#6b6b6b mb-2">自作OSSの一つ。利用者と同じようにCLIを動かし、外部から見える結果を確かめるツール。</p>
+
 <v-clicks>
 
 - 利用者から見える挙動を、実装言語から独立して固定するE2Eツール
@@ -191,6 +193,8 @@ layout: talk-content
 
 # git-kura で作業領域を制約する
 
+<p class="text-1.15rem text-#6b6b6b mb-2">自作OSSの一つ。複数のAIエージェントを並行で動かすとき、作業の衝突を防ぐツール。</p>
+
 <v-clicks>
 
 - worktree を作業単位として分離し、変更対象を claim する
@@ -218,6 +222,7 @@ layout: talk-diagram
 # installerer で generator を作る
 
 <div class="dbody" style="gap:0.9rem;">
+  <p class="text-1.15rem text-#6b6b6b" style="margin:0 0 0.6rem;text-align:center;">自作OSSの一つ。CLIを配る際の install スクリプトを生成するツール。</p>
   <div class="flex items-center gap-4">
     <div class="dbox dbox--soft dbox--sm">AIに毎回<br>成果物を生成させる</div>
     <div class="darrow">→</div>
@@ -249,6 +254,8 @@ layout: talk-content
 ---
 
 # rellog で判断を人間に残す
+
+<p class="text-1.15rem text-#6b6b6b mb-2">自作OSSの一つ。変更履歴を記録し、リリースノート作成を助けるツール。</p>
 
 <v-clicks>
 
