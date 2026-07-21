@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="talk-cover__corner" />
-    <div class="talk-cover__pageno"><SlideCurrentNo /></div>
+    <PageNumber />
   </div>
 </template>
 
@@ -81,12 +81,5 @@
   height: 90px;
   background: rgba(255, 255, 255, 0.14);
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
-.talk-cover__pageno {
-  position: absolute;
-  right: 14px;
-  bottom: 8px;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.85);
 }
 </style>

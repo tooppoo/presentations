@@ -14,11 +14,17 @@ mdc: true
 layout: talk-cover
 ---
 
-# OSS開発を通じて考える、<br>AI開発のこれから
+::caption::
 
-AIに任せるために、AIだけに依存しない
+# OSS開発を通じて考える<br>AI開発のこれから
+
+::info::
 
 2026-07-21
+
+SAPPORO ENGINEER BASE #15
+
+#seb_sapporo
 
 @Philomagi
 
@@ -26,6 +32,10 @@ AIに任せるために、AIだけに依存しない
 2026年前半の振り返りと、後半への方針表明。
 4つのOSSを個別紹介ではなく、AI開発で生じた問題への対処事例として話す。
 -->
+
+---
+src: ./pages/profile.md
+---
 
 ---
 layout: talk-content
