@@ -1,7 +1,7 @@
 {
-  "name": "template-dev",
+  "name": "presentations-dev",
   "image": "mcr.microsoft.com/devcontainers/base:2.1.9-trixie",
-  "workspaceFolder": "/workspaces/fizz",
+  "workspaceFolder": "/workspaces/presentations",
   "remoteUser": "vscode",
   "runArgs": [
     "--init"
