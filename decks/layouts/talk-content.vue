@@ -10,8 +10,8 @@
   position: absolute;
   inset: 0;
   padding: 0;
-  background: #f4f4f5;
-  color: #5c5c5c;
+  background: var(--talk-bg);
+  color: var(--talk-text);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -28,20 +28,20 @@
   padding: 0 3.4rem;
   display: flex;
   align-items: center;
-  background: #4a86e8;
-  color: #ffffff;
+  background: var(--talk-primary);
+  color: var(--talk-on-primary);
   font-weight: 700;
   font-size: 2.1rem;
   letter-spacing: 0.01em;
-  box-shadow: 0 7px 12px -8px rgba(0, 0, 0, 0.28);
+  box-shadow: var(--talk-shadow-header);
 }
 
 /* 本文領域 */
-.talk-content > :not(h1) {
+.talk-content > :not(h1):not(.page-number) {
   padding-left: 3.4rem;
   padding-right: 3.4rem;
 }
-.talk-content > :not(h1):first-of-type {
+.talk-content > :not(h1):not(.page-number):first-of-type {
   margin-top: 1.2rem;
 }
 
@@ -54,7 +54,7 @@
   margin: 0.58em 0;
   font-size: 1.4rem;
   line-height: 1.5;
-  color: #5c5c5c;
+  color: var(--talk-text);
 }
 /* レベル1: 丸 bullet */
 .talk-content ul li::before {
@@ -65,7 +65,7 @@
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: #6b6b6b;
+  background: var(--talk-bullet);
 }
 /* レベル2: 白抜きの丸、やや小さく淡く */
 .talk-content ul ul {
@@ -73,12 +73,12 @@
 }
 .talk-content ul ul li {
   font-size: 1.2rem;
-  color: #7a7a7a;
+  color: var(--talk-text-muted);
   margin: 0.42em 0;
 }
 .talk-content ul ul li::before {
   background: transparent;
-  border: 1.5px solid #8a8a8a;
+  border: 1.5px solid var(--talk-text-subtle);
   width: 0.45rem;
   height: 0.45rem;
   top: 0.55em;
@@ -90,13 +90,13 @@
   margin: 0.7em 0;
 }
 .talk-content strong {
-  color: #3a6fd0;
+  color: var(--talk-primary-strong);
   font-weight: 700;
 }
 .talk-content blockquote {
-  border-left: 4px solid #9db8e8;
-  background: #eef2fb;
-  color: #4f4f4f;
+  border-left: 4px solid var(--talk-quote-bar);
+  background: var(--talk-surface-soft);
+  color: var(--talk-text-quote);
   margin: 0;
   padding: 0em 1.1em;
   font-size: 1.16rem;
@@ -104,15 +104,15 @@
 }
 /* インライン code のみ pill 装飾（pre 内の code には付けない） */
 .talk-content :not(pre) > code {
-  background: #e7e9ee;
-  color: #3a6fd0;
+  background: var(--talk-inline-code-bg);
+  color: var(--talk-primary-strong);
   border-radius: 4px;
   padding: 0.08em 0.35em;
   font-size: 0.92em;
 }
 /* code block はブロック全体で一つの背景にする */
 .talk-content pre {
-  background-color: #eceef3 !important;
+  background-color: var(--talk-code-bg) !important;
   border-radius: 8px;
   font-size: 1.18rem;
   line-height: 1.62;

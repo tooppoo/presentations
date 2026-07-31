@@ -10,8 +10,8 @@
   position: absolute;
   inset: 0;
   padding: 0;
-  background: #f4f4f5;
-  color: #5c5c5c;
+  background: var(--talk-bg);
+  color: var(--talk-text);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -27,16 +27,16 @@
   padding: 0 3rem;
   display: flex;
   align-items: center;
-  background: #4a86e8;
-  color: #ffffff;
+  background: var(--talk-primary);
+  color: var(--talk-on-primary);
   font-weight: 700;
   font-size: 1.6rem;
   letter-spacing: 0.01em;
-  box-shadow: 0 6px 10px -8px rgba(0, 0, 0, 0.28);
+  box-shadow: var(--talk-shadow-header-slim);
 }
 
 /* 図の領域 */
-.talk-diagram > :not(h1) {
+.talk-diagram > :not(h1):not(.page-number) {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@
   margin: 0;
 }
 .talk-diagram strong {
-  color: #3a6fd0;
+  color: var(--talk-primary-strong);
 }
 
 /* 図の部品 */
@@ -58,32 +58,32 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: #ffffff;
-  border: 1.5px solid #d2d7e0;
+  background: var(--talk-surface);
+  border: 1.5px solid var(--talk-border);
   border-radius: 10px;
   padding: 0.7rem 1.15rem;
   font-weight: 600;
   font-size: 1.2rem;
-  color: #4b4b4b;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+  color: var(--talk-text-strong);
+  box-shadow: var(--talk-shadow-box);
   white-space: nowrap;
 }
 .talk-diagram .dbox--accent {
-  background: #4a86e8;
-  border-color: #4a86e8;
-  color: #ffffff;
+  background: var(--talk-primary);
+  border-color: var(--talk-primary);
+  color: var(--talk-on-primary);
 }
 .talk-diagram .dbox--soft {
-  background: #eef2fb;
-  border-color: #b7c8ec;
-  color: #35507f;
+  background: var(--talk-surface-soft);
+  border-color: var(--talk-border-soft);
+  color: var(--talk-soft-text);
 }
 .talk-diagram .dbox--sm {
   font-size: 1rem;
   padding: 0.5rem 0.8rem;
 }
 .talk-diagram .darrow {
-  color: #9aa3b2;
+  color: var(--talk-arrow);
   font-size: 1.7rem;
   line-height: 1;
   flex: 0 0 auto;
@@ -96,19 +96,19 @@
   border-radius: 999px;
 }
 .talk-diagram .dtag--bun {
-  background: #e5efff;
-  color: #2f66c8;
-  border: 1px solid #b7ceff;
+  background: var(--talk-tag-accent-bg);
+  color: var(--talk-tag-accent-text);
+  border: 1px solid var(--talk-tag-accent-border);
 }
 .talk-diagram .dtag--reuse {
-  background: #eeeeee;
-  color: #666666;
-  border: 1px solid #d4d4d4;
+  background: var(--talk-tag-neutral-bg);
+  color: var(--talk-tag-neutral-text);
+  border: 1px solid var(--talk-tag-neutral-border);
 }
 .talk-diagram .dcaption {
   margin-top: 1.6rem;
   font-size: 1.15rem;
-  color: #666666;
+  color: var(--talk-text-caption);
   text-align: center;
 }
 .talk-diagram blockquote {
