@@ -3,6 +3,8 @@ theme: default
 title: GitHub Actions ハンズオン
 info: |
   fork したリポジトリで workflow を動かし、独自 action を作るまでの 45 分
+
+  開催が決まったら、表紙の日付と勉強会名を埋めること。
 colorSchema: light
 aspectRatio: 16/9
 fonts:
@@ -56,47 +58,75 @@ layout: talk-content
 
 ---
 layout: talk-content
+class: head-sm
 ---
 
 # 進め方
 
-<v-clicks>
+<div class="timetable">
 
-- 4 つのステップを順に進める
+| | 内容 | 目安 |
+| --- | --- | --- |
+| 説明 | GitHub Actions の読み方 | 12 分 |
+| STEP 1 | リポジトリを fork する | 4 分 |
+| STEP 2 | hello-world.yml を動かす | 8 分 |
+| STEP 3 | README.md を出力する | 8 分 |
+| STEP 4 | 自分の action を作る | 7 分 |
+| 予備 | 質問、詰まったときの対応 | 6 分 |
+
+</div>
+
 - 各ステップは「説明を聞く」「各自で手を動かす」の順
-- コピー用のコマンドと YAML は手順書にまとめてある
 - 詰まったら手を挙げる。近くの人と相談してもよい
 
-</v-clicks>
+<style scoped>
+.talk-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.05rem;
+  margin: 0.2em 0 0.6em;
+}
+.talk-content th, .talk-content td {
+  border-bottom: 1px solid var(--talk-border);
+  padding: 0.32em 0.6em;
+  text-align: left;
+}
+.talk-content th { color: var(--talk-primary-strong); }
+.talk-content td:last-child { text-align: right; white-space: nowrap; }
+.talk-content ul li { font-size: 1.15rem; margin: 0.3em 0; }
+</style>
 
 <!--
-スライドは進行の目印で、実際に見るのは手順書のほう。ここで手順書のURLを共有しておく。
+時間の約束を最初に見せる。押したときに削るのは予備と STEP 3 の寄り道で、STEP 4 は削らない。
 -->
 
 ---
 layout: talk-content
+class: head-sm
 ---
 
 # 事前準備
-
-<v-clicks>
 
 - GitHub アカウント
 - ブラウザ
 - 作業はすべて GitHub の画面上で完結する
   - ローカルに clone して進めたい場合の手順も手順書にある
 
-</v-clicks>
+<div class="mt-3 links">
 
-<div v-click class="mt-2">
+題材リポジトリ: `https://github.com/tooppoo/github-actions-hands-on`
 
-題材リポジトリ: <br>
-`https://github.com/tooppoo/github-actions-hands-on`
+手順書: `https://github.com/tooppoo/github-actions-hands-on/blob/main/docs/hands-on.md`
 
 </div>
 
+<style scoped>
+.talk-content .links p { font-size: 1.1rem; margin: 0.3em 0; }
+</style>
+
 <!--
-環境構築で時間を溶かさないため、ブラウザ完結を主線にする。ローカル派には手順書のフォールバックを案内する。
+環境構築で時間を溶かさないため、ブラウザ完結を主線にする。
+このスライドは URL を確認したい人が戻ってくる先になるので、クリック送りにしない。
 -->
 
 ---
@@ -131,56 +161,64 @@ layout: talk-diagram
 # 用語の地図
 
 <div class="dbody">
-  <div class="flex items-start gap-6">
-    <div class="dcol">
-      <div class="dbox dbox--accent">workflow</div>
-      <div class="dnote">.github/workflows/*.yml</div>
-    </div>
-    <div class="darrow">→</div>
-    <div class="dcol">
-      <div class="dbox">job</div>
-      <div class="dnote">runner 1 台に対応</div>
-    </div>
-    <div class="darrow">→</div>
-    <div class="dcol">
-      <div class="dbox">step</div>
-      <div class="dnote">run: コマンド<br>uses: action</div>
+  <div class="dnest dnest--wf">
+    <div class="dnest__label">workflow</div>
+    <div class="dnest__note">.github/workflows/*.yml</div>
+    <div class="dnest dnest--job">
+      <div class="dnest__label">job</div>
+      <div class="dnest__note">runner 1 台に対応</div>
+      <div class="dnest dnest--step">
+        <div class="dnest__label">step</div>
+        <div class="dnest__note">run: コマンド / uses: action</div>
+      </div>
     </div>
   </div>
-  <div class="dcaption">runner は GitHub が用意する仮想マシン</div>
+  <div class="dcaption">workflow が job を含み、job が step を含む</div>
 </div>
 
 <style scoped>
-.talk-diagram .dbox { font-size: 1.4rem; padding: 0.9rem 1.6rem; }
-.talk-diagram .dcol {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
+.talk-diagram .dnest {
+  width: 100%;
+  border: 1.5px solid var(--talk-border);
+  border-radius: 12px;
+  background: var(--talk-surface);
+  padding: 0.7rem 1rem 0.9rem;
 }
-.talk-diagram .dnote {
-  font-size: 0.95rem;
-  line-height: 1.5;
+.talk-diagram .dnest--wf {
+  width: 62%;
+  border-color: var(--talk-primary);
+  background: var(--talk-surface-soft);
+}
+.talk-diagram .dnest--job { margin-top: 0.5rem; }
+.talk-diagram .dnest--step { margin-top: 0.5rem; }
+.talk-diagram .dnest__label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--talk-primary-strong);
+}
+.talk-diagram .dnest__note {
+  font-size: 0.92rem;
   color: var(--talk-text-muted);
-  text-align: center;
-  min-height: 2.9em;
+  margin-top: 0.15rem;
 }
-.talk-diagram .darrow { margin-top: 1.1rem; }
-.talk-diagram .dcaption { font-size: 1.25rem; margin-top: 2rem; }
+.talk-diagram .dcaption { font-size: 1.2rem; margin-top: 1.6rem; }
 </style>
 
 <!--
-この3語だけ覚えれば YAML は読める。runner という言葉はここで一度出しておき、STEP 3 の checkout で回収する。
+矢印にしないのは、「workflow の次に job が動く」と読まれると次の YAML の入れ子と結びつかないため。
+runner という言葉はここで一度出しておき、STEP 3 の checkout で回収する。
 -->
 
 ---
 layout: talk-content
-class: code-xs
+class: code-xs head-xs
 ---
 
 # workflow YAML を読む
 
-```yaml {all|1|2-6|8-9|11-15}
+`.github/workflows/hello-world.yml`
+
+```yaml {all|1|2-6|8-10|12-16}
 name: CI
 on:
   push:
@@ -199,19 +237,20 @@ jobs:
 ```
 
 <style scoped>
-.talk-content h1 { height: 18%; font-size: 1.7rem; }
-.talk-content pre { margin-top: 0.4em; }
+.talk-content p { font-size: 1rem; margin: 0.3em 0; }
+.talk-content pre { margin-top: 0.2em; }
 </style>
 
 <!--
 クリックで上から順に、名前・きっかけ・実行するマシン・実行する中身、と辿る。
 題材リポジトリに最初から入っているファイルそのもの。
+ファイル名は hello-world.yml だが name: は CI。Actions タブに並ぶのは name: の値のほう、と一言添える。
 -->
 
 ---
 layout: talk-step
 step: 1
-time: 5 分
+time: 4 分
 ---
 
 # リポジトリを fork する
@@ -224,6 +263,7 @@ time: 5 分
 
 ---
 layout: talk-content
+class: head-sm
 ---
 
 # STEP 1 の手順
@@ -232,45 +272,41 @@ layout: talk-content
   - `https://github.com/tooppoo/github-actions-hands-on`
 - 右上の `Fork` を押す
 - Owner を自分のアカウントにして `Create fork`
+- **Actions タブを開き、`I understand my workflows, go ahead and enable them` を押す**
 - 以降の作業は、すべて fork した側のリポジトリで行う
-
-<style scoped>
-.talk-content h1 { height: 22%; font-size: 1.8rem; }
-</style>
 
 <!--
 このスライドは作業中ずっと表示しておく。全項目を最初から出すのはそのため。
+4 つ目を落とすと STEP 2 で全員が止まるので、次のスライドで理由まで説明する。
 -->
 
 ---
 layout: talk-content
+class: head-sm
 ---
 
-# fork 直後の落とし穴
-
-<v-clicks>
+# なぜ有効化が要るのか
 
 - fork したリポジトリでは、workflow が最初は無効になっている
+  - 他人の書いた workflow が、fork した瞬間に動くのを防ぐため
 - Actions タブを開くと、確認ボタンが表示される
-- `I understand my workflows, go ahead and enable them` を押す
 - 押すまでは、push しても何も起きない
 
-</v-clicks>
-
-<div v-click class="mt-2">
+<div class="mt-2">
 
 > fork 先で最初にやること
 
 </div>
 
 <!--
-ここを飛ばすと STEP 2 で全員が止まる。作業前に必ず案内する。
+ここを飛ばすと STEP 2 で全員が止まる。理由まで話すと、押し忘れたときに自力で気付ける。
+クリック送りにしないのは、作業直前の注意喚起を一覧で見せたいため。
 -->
 
 ---
 layout: talk-step
 step: 2
-time: 10 分
+time: 8 分
 ---
 
 # hello-world.yml を動かす
@@ -283,6 +319,7 @@ time: 10 分
 
 ---
 layout: talk-content
+class: head-sm
 ---
 
 # STEP 2 の手順
@@ -292,10 +329,7 @@ layout: talk-content
 - `echo` の文字列を書き換え、step をもう 1 つ足す
 - `Commit directly to the main branch` を選んでコミット
 - Actions タブを開き、実行されたことを確認する
-
-<style scoped>
-.talk-content h1 { height: 22%; font-size: 1.8rem; }
-</style>
+  - 一覧に並ぶ名前は、ファイル名ではなく `name:` の値（`CI`）
 
 <!--
 作業中は表示しっぱなしにする。ブランチを切ると on: の条件から外れて動かないので、main への直接コミットを指定している。
@@ -303,6 +337,7 @@ layout: talk-content
 
 ---
 layout: talk-content
+class: head-sm
 ---
 
 # STEP 2 の変更例
@@ -320,11 +355,6 @@ layout: talk-content
 - step は好きなだけ並べられる
 
 </v-clicks>
-
-<style scoped>
-.talk-content h1 { height: 22%; font-size: 1.8rem; }
-.talk-content pre { font-size: 1.05rem; }
-</style>
 
 <!--
 `date` を足すのは、step が複数並ぶことと、実行のたびに結果が変わることを同時に見せるため。
@@ -363,28 +393,18 @@ layout: talk-diagram
 
 <style scoped>
 .talk-diagram .dbox { font-size: 1.2rem; padding: 0.8rem 1.1rem; }
-.talk-diagram .dcol {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-}
-.talk-diagram .dnote {
-  font-size: 0.92rem;
-  line-height: 1.5;
-  color: var(--talk-text-muted);
-  text-align: center;
-}
+.talk-diagram .dnote { font-size: 0.92rem; }
 .talk-diagram .darrow { margin-top: 0.7rem; }
 .talk-diagram .dcaption { font-size: 1.2rem; margin-top: 2rem; }
 </style>
 
 <!--
-ログの階層が分かっていないと、失敗したときに原因まで辿り着けない。ここで開き方を揃えておく。
+矢印はここでは画面を掘っていく順序を指す。ログの階層が分かっていないと、失敗の原因まで辿り着けない。
 -->
 
 ---
 layout: talk-content
+class: head-sm
 ---
 
 # 寄り道: いつ動くかを決める
@@ -392,9 +412,9 @@ layout: talk-content
 <v-clicks>
 
 - `on:` に書いたものが、workflow のきっかけになる
-- `push: branches: [main]` は、main への push で動く
+- `on.push.branches` に `main` を書くと、main への push で動く
 - `workflow_dispatch:` は手動実行を許可する
-- Actions タブの `Run workflow` から、push なしで実行できる
+  - Actions タブの `Run workflow` から、push なしで実行できる
 
 </v-clicks>
 
@@ -405,13 +425,14 @@ layout: talk-content
 </div>
 
 <!--
-手動実行を知っておくと、以降のステップで試行錯誤が速くなる。時間が押していたら口頭だけで流す。
+手動実行を知っておくと、以降のステップで試行錯誤が速くなる。
+時間が押していたらこのスライドは飛ばす。ここが最初の削りどころ。
 -->
 
 ---
 layout: talk-step
 step: 3
-time: 10 分
+time: 8 分
 ---
 
 # README.md の中身を出力する
@@ -450,31 +471,23 @@ layout: talk-diagram
 
 <style scoped>
 .talk-diagram .dbox { font-size: 1.3rem; padding: 0.9rem 1.4rem; }
-.talk-diagram .dcol {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-}
-.talk-diagram .dnote {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--talk-text-muted);
-  text-align: center;
-}
 .talk-diagram .darrow { margin-top: 0.9rem; }
 .talk-diagram .dcaption { font-size: 1.25rem; margin-top: 2rem; }
 </style>
 
 <!--
+矢印はここでは runner の状態が変わる前後を指す。
 「リポジトリの中で動いているのだからファイルはあるはず」と思われがちなところ。runner とリポジトリは別物だと明示する。
 -->
 
 ---
 layout: talk-content
+class: head-sm
 ---
 
 # STEP 3 の手順
+
+`.github/workflows/hello-world.yml`
 
 ```yaml
     steps:
@@ -482,14 +495,14 @@ layout: talk-content
       - run: cat README.md
 ```
 
-- `hello-world.yml` の `steps` を上のように書き換える
-- コミットして、Actions タブで出力を確認する
+- `steps` を上のように書き換え、コミットする
+- Actions タブで、README.md の中身が出力されたことを確認する
 - 余裕があれば `checkout` の行を消して、失敗を見てみる
 
 <style scoped>
-.talk-content h1 { height: 20%; font-size: 1.8rem; }
-.talk-content pre { font-size: 1.05rem; margin-top: 0.4em; }
-.talk-content ul li { font-size: 1.28rem; }
+.talk-content p { font-size: 1rem; margin: 0.3em 0; }
+.talk-content pre { margin: 0.2em 0 0.6em; }
+.talk-content ul li { font-size: 1.2rem; margin: 0.35em 0; }
 </style>
 
 <!--
@@ -524,7 +537,7 @@ layout: talk-content
 ---
 layout: talk-step
 step: 4
-time: 8 分
+time: 7 分
 ---
 
 # 自分の action を作る
@@ -532,7 +545,7 @@ time: 8 分
 action.yml を書いて、同じリポジトリから呼ぶ
 
 <!--
-最後のステップ。使う側から作る側に回る。
+最後のステップ。使う側から作る側に回る。ここは時間が押しても削らない。
 -->
 
 ---
@@ -556,12 +569,15 @@ layout: talk-content
 
 ---
 layout: talk-content
-class: code-sm
+class: code-xs head-xs
 ---
 
-# STEP 4 の手順: action.yml
+# STEP 4 の手順
 
-`.github/actions/greet/action.yml` を新規作成する
+<div class="two-column">
+<div class="column">
+
+新規作成: `.github/actions/greet/action.yml`
 
 ```yaml
 name: greet
@@ -578,21 +594,10 @@ runs:
       run: echo "Hello, ${{ inputs.name }}!"
 ```
 
-<style scoped>
-.talk-content h1 { height: 16%; font-size: 1.6rem; }
-.talk-content p { font-size: 1.1rem; margin: 0.4em 0; }
-.talk-content pre { margin-top: 0.3em; }
-</style>
+</div>
+<div class="column">
 
-<!--
-inputs で値を受け取れることを見せる。outputs まで広げると 8 分では収まらないので、余力のある人向けに手順書へ回す。
--->
-
----
-layout: talk-content
----
-
-# STEP 4 の手順: 呼び出す
+書き換え: `.github/workflows/hello-world.yml`
 
 ```yaml
     steps:
@@ -603,16 +608,23 @@ layout: talk-content
 ```
 
 - composite の step には `shell` の指定が必要
-- リポジトリ内の action は、`checkout` の後でないと呼べない
+- リポジトリ内の action は `checkout` の後で呼ぶ
+
+</div>
+</div>
 
 <style scoped>
-.talk-content h1 { height: 18%; font-size: 1.8rem; }
-.talk-content pre { font-size: 1rem; margin-top: 0.4em; }
-.talk-content ul li { font-size: 1.24rem; }
+.talk-content .two-column { display: flex; gap: 1.6rem; }
+.talk-content .column { width: 50%; }
+.talk-content p { font-size: 0.95rem; margin: 0.2em 0; }
+.talk-content pre { margin: 0.2em 0 0.5em; }
+.talk-content ul li { font-size: 0.95rem; margin: 0.3em 0; }
 </style>
 
 <!--
+2 つのファイルを同時に触るので、1 枚に並べて作業中ずっと表示しておく。
 STEP 3 で入れた checkout が、ここで効いてくる。パスを指定して呼ぶ以上、ファイルが runner 上にある必要がある。
+outputs まで広げると 7 分では収まらないので、余力のある人向けに手順書へ回す。
 -->
 
 ---

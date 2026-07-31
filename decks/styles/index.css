@@ -5,8 +5,10 @@
  * その配下の styles/index.css を全スライドへ注入する。
  * decks/*.md がエントリなので、このファイルは全デッキで共有される。
  *
- * レイアウト（decks/layouts/*.vue）およびスライドの <style scoped> では
- * 色を HEX で直書きせず、必ずここで定義した var(--talk-*) を参照すること。
+ * decks/layouts/*.vue、decks/components/*.vue、および新規に書くデッキでは
+ * 色を HEX で直書きせず、ここで定義した var(--talk-*) を参照すること。
+ * 既存デッキ（bun-standalone-cli.md / oss-ai-development.md）は未移行で、
+ * インライン style 属性に HEX が残っている。
  */
 :root {
   /* brand */
@@ -28,7 +30,7 @@
   --talk-text-subtle: #8a8a8a;
   --talk-text-caption: #666666;
   --talk-bullet: #6b6b6b;
-  --talk-page-number: black;
+  --talk-page-number: #000000;
 
   /* primary 帯の上に乗る文字・装飾 */
   --talk-on-primary: #ffffff;
@@ -72,4 +74,17 @@
 .slidev-layout.code-xs pre {
   font-size: 13px !important;
   line-height: 1.5 !important;
+}
+
+/*
+ * 本文が多いスライド向けに、青ヘッダー帯を詰める。
+ * 既定は talk-content.vue の 30% / 2.1rem。段階はこの 2 つに限る。
+ */
+.slidev-layout.head-sm > h1 {
+  height: 22%;
+  font-size: 1.8rem;
+}
+.slidev-layout.head-xs > h1 {
+  height: 16%;
+  font-size: 1.6rem;
 }

@@ -88,6 +88,19 @@
   line-height: 1;
   flex: 0 0 auto;
 }
+/* dbox とその説明文を縦に積む列 */
+.talk-diagram .dcol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.talk-diagram .dnote {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--talk-text-muted);
+  text-align: center;
+}
 .talk-diagram .dtag {
   font-size: 0.85rem;
   font-weight: 700;
