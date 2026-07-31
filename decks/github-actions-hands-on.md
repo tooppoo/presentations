@@ -218,7 +218,7 @@ class: code-xs head-xs
 
 `.github/workflows/hello-world.yml`
 
-```yaml {all|1|2-6|8-10|12-16}
+```yaml {all|1|2-6|8-12|14-15}
 name: CI
 on:
   push:
@@ -272,7 +272,8 @@ class: head-sm
   - `https://github.com/tooppoo/github-actions-hands-on`
 - 右上の `Fork` を押す
 - Owner を自分のアカウントにして `Create fork`
-- **Actions タブを開き、`I understand my workflows, go ahead and enable them` を押す**
+- **Actions タブを開き、確認ボタンを押す**
+  - `I understand my workflows, go ahead and enable them`
 - 以降の作業は、すべて fork した側のリポジトリで行う
 
 <!--
