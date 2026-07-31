@@ -525,7 +525,7 @@ time: 7 分
 
 # 自分の action を作る
 
-action.yml を書いて、同じリポジトリから呼ぶ
+action.yml を書いて、公開 action と同じ書き方で呼ぶ
 
 <!--
 最後のステップ。使う側から作る側に回る。ここは時間が押しても削らない。
@@ -542,12 +542,19 @@ layout: talk-content
 - 同じ step の並びを、複数の workflow で使い回したい
 - step のかたまりに名前を付けて、意図を示したい
 - composite action なら、YAML を書くだけで作れる
-- リポジトリの中に置けば、そのリポジトリから呼び出せる
+- `actions/checkout` と同じ `<owner>/<repo>` の形で呼べる
 
 </v-clicks>
 
+<div v-click class="mt-2">
+
+> 自作の action も、公開されている action も、呼ぶ側から見れば同じ
+
+</div>
+
 <!--
 再利用が主な動機だが、名前を付けて意図を残せるという効果も大きい。
+4 つ目が STEP 4 の狙い。特別な呼び方を覚えるのではなく、STEP 3 で使った uses がそのまま効く。
 -->
 
 ---
@@ -557,10 +564,10 @@ class: code-sm head-xs
 
 # STEP 4 の手順
 
-<div class="two-column">
+<div class="two-column step4">
 <div class="column">
 
-<p class="code-caption">新規作成: <code>.github/actions/greet/action.yml</code></p>
+<p class="code-caption">新規作成: リポジトリのルートに <code>action.yml</code></p>
 
 ```yaml
 name: greet
@@ -579,13 +586,13 @@ runs:
 
 ```yaml
     steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/greet
+      - uses: <owner>/github-actions-hands-on@main
 ```
 
-- 2 ファイルとも main へ直接コミットする
+- `<owner>` は自分の GitHub アカウント名
+- `action.yml` を先にコミットしてから workflow を書き換える
 - composite の `run` step には `shell` の指定が必要
-- リポジトリ内の action は `checkout` の後で呼ぶ
+- `checkout` は要らない。action は GitHub 側から取得される
 
 </div>
 </div>
@@ -595,12 +602,47 @@ runs:
 .talk-content .column { width: 50%; }
 .talk-content .code-caption { font-size: 0.95rem; }
 .talk-content ul li { font-size: 0.95rem; margin: 0.3em 0; }
+/* 右カラムの uses は 1 行が長いので、この列だけさらに詰める */
+.talk-content .step4 .column:last-child pre { font-size: 12px !important; }
 </style>
 
 <!--
 2 つのファイルを同時に触るので、1 枚に並べて作業中ずっと表示しておく。
-STEP 3 で入れた checkout が、ここで効いてくる。パスを指定して呼ぶ以上、ファイルが runner 上にある必要がある。
+呼び方が actions/checkout@v7 と同じ形になっている点を指摘する。ここが STEP 4 の山。
+checkout が要らないのは、リポジトリのファイルを読むのではなく、runner が action を取りに行くため。
+STEP 3 とちょうど裏返しになっているので、対比で説明する。
+順序を逆にすると、action.yml がまだ main に無い状態で参照して失敗する。
 今日は定義して動かすところまで。値を渡す inputs と受け取る outputs は、まとめで名前を挙げるだけにする。
+-->
+
+---
+layout: talk-content
+class: code-sm head-sm
+---
+
+# 余裕があれば: action を増やす
+
+<p class="code-caption">新規作成: <code>actions/bye/action.yml</code></p>
+
+```yaml
+name: bye
+description: 別れの挨拶を出力する
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: echo "Bye!"
+```
+
+<p class="code-caption">呼び出し: リポジトリ名のあとにディレクトリを続ける</p>
+
+```yaml
+      - uses: <owner>/github-actions-hands-on/actions/bye@main
+```
+
+<!--
+1 つのリポジトリに複数の action を置ける。ルートの action.yml はそのまま残してよい。
+時間が余った人向け。全員でやる必要はない。
 -->
 
 ---
@@ -614,7 +656,7 @@ layout: talk-content
 - workflow は `on` と `jobs` と `steps` の 3 つで読める
 - runner はまっさらなマシン。ファイルが要るなら `checkout` する
 - 公開された action は `uses` で呼び、バージョンを固定する
-- step のかたまりは、composite action としてまとめられる
+- 自作の action も、同じ `<owner>/<repo>` の形で呼べる
 
 </v-clicks>
 
