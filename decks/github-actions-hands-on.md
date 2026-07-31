@@ -552,7 +552,7 @@ layout: talk-content
 
 ---
 layout: talk-content
-class: code-xs head-xs
+class: code-sm head-xs
 ---
 
 # STEP 4 の手順
@@ -564,17 +564,12 @@ class: code-xs head-xs
 
 ```yaml
 name: greet
-description: 名前を受け取って挨拶を出力する
-inputs:
-  name:
-    description: 挨拶する相手
-    required: false
-    default: World
+description: 挨拶を出力する
 runs:
   using: composite
   steps:
     - shell: bash
-      run: echo "Hello, ${{ inputs.name }}!"
+      run: echo "Hello, GitHub Actions!"
 ```
 
 </div>
@@ -586,8 +581,6 @@ runs:
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/greet
-        with:
-          name: GitHub Actions
 ```
 
 - 2 ファイルとも main へ直接コミットする
@@ -607,7 +600,7 @@ runs:
 <!--
 2 つのファイルを同時に触るので、1 枚に並べて作業中ずっと表示しておく。
 STEP 3 で入れた checkout が、ここで効いてくる。パスを指定して呼ぶ以上、ファイルが runner 上にある必要がある。
-outputs まで広げると 7 分では収まらないので、余力のある人向けに手順書へ回す。
+今日は定義して動かすところまで。値を渡す inputs と受け取る outputs は、まとめで名前を挙げるだけにする。
 -->
 
 ---
@@ -627,10 +620,11 @@ layout: talk-content
 
 <div v-click class="mt-2">
 
-> 次に読むもの: GitHub Actions 公式ドキュメント、Marketplace、reusable workflow
+> 次に読むもの: action の inputs と outputs、reusable workflow、GitHub Actions 公式ドキュメント
 
 </div>
 
 <!--
-今日触れなかったものとして、reusable workflow、secrets、matrix、キャッシュあたりを口頭で挙げる。
+今日作った action は値を受け取らない。引数を渡すのが inputs、結果を返すのが outputs。
+ほかに触れなかったものとして、secrets、matrix、キャッシュあたりを口頭で挙げる。
 -->
