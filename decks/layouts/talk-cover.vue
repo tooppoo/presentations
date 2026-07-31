@@ -19,8 +19,8 @@
   position: absolute;
   inset: 0;
   padding: 0;
-  background: #4a86e8;
-  color: #ffffff;
+  background: var(--talk-primary);
+  color: var(--talk-on-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +55,7 @@
   height: 40%;
 }
 .talk-cover h1 {
-  color: #ffffff;
+  color: var(--talk-on-primary);
   font-weight: 700;
   font-size: 3.2rem;
   line-height: 1.25;
@@ -63,14 +63,14 @@
   letter-spacing: 0.01em;
 }
 .talk-cover p {
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--talk-on-primary-soft);
   font-size: 1.40rem;
   line-height: 1.9;
   margin: 0;
 }
 .talk-cover a {
-  color: #ffffff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--talk-on-primary);
+  border-bottom: 1px solid var(--talk-on-primary-line);
 }
 /* 右下の折り返し角 */
 .talk-cover__corner {
@@ -79,7 +79,7 @@
   bottom: 0;
   width: 90px;
   height: 90px;
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--talk-on-primary-veil);
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
 }
 </style>

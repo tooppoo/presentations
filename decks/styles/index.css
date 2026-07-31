@@ -1,0 +1,99 @@
+/*
+ * デッキ共通のデザイントークン。
+ *
+ * Slidev はエントリ .md のあるディレクトリを user root として扱い、
+ * その配下の styles/index.css を全スライドへ注入する。
+ * decks/*.md がエントリなので、このファイルは全デッキで共有される。
+ *
+ * decks/layouts/*.vue、decks/components/*.vue、および新規に書くデッキでは
+ * 色を HEX で直書きせず、ここで定義した var(--talk-*) を参照すること。
+ * 既存デッキ（bun-standalone-cli.md / oss-ai-development.md）は未移行で、
+ * インライン style 属性に HEX が残っている。
+ */
+:root {
+  /* brand */
+  --talk-primary: #4a86e8;
+  --talk-primary-strong: #3a6fd0;
+
+  /* surface */
+  --talk-bg: #f4f4f5;
+  --talk-surface: #ffffff;
+  --talk-surface-soft: #eef2fb;
+  --talk-code-bg: #eceef3;
+  --talk-inline-code-bg: #e7e9ee;
+
+  /* text */
+  --talk-text: #5c5c5c;
+  --talk-text-strong: #4b4b4b;
+  --talk-text-quote: #4f4f4f;
+  --talk-text-muted: #7a7a7a;
+  --talk-text-subtle: #8a8a8a;
+  --talk-text-caption: #666666;
+  --talk-bullet: #6b6b6b;
+  --talk-page-number: #000000;
+
+  /* primary 帯の上に乗る文字・装飾 */
+  --talk-on-primary: #ffffff;
+  --talk-on-primary-soft: rgba(255, 255, 255, 0.92);
+  --talk-on-primary-line: rgba(255, 255, 255, 0.5);
+  --talk-on-primary-veil: rgba(255, 255, 255, 0.14);
+
+  /* border */
+  --talk-border: #d2d7e0;
+  --talk-border-soft: #b7c8ec;
+  --talk-quote-bar: #9db8e8;
+
+  /* 図の部品 */
+  --talk-arrow: #9aa3b2;
+  --talk-soft-text: #35507f;
+
+  /* タグ */
+  --talk-tag-accent-bg: #e5efff;
+  --talk-tag-accent-text: #2f66c8;
+  --talk-tag-accent-border: #b7ceff;
+  --talk-tag-neutral-bg: #eeeeee;
+  --talk-tag-neutral-text: #666666;
+  --talk-tag-neutral-border: #d4d4d4;
+
+  /* shadow */
+  --talk-shadow-header: 0 7px 12px -8px rgba(0, 0, 0, 0.28);
+  --talk-shadow-header-slim: 0 6px 10px -8px rgba(0, 0, 0, 0.28);
+  --talk-shadow-box: 0 2px 5px rgba(0, 0, 0, 0.06);
+}
+
+/*
+ * コード量が多いスライド向けの調整。frontmatter の class で指定する。
+ *
+ * テーマ側が pre に font-size: var(--slidev-code-font-size) !important を当てているため、
+ * 打ち消すには同じく !important が要る。既定は各レイアウトの 18px。
+ */
+.slidev-layout.code-sm pre {
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+}
+.slidev-layout.code-xs pre {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+/*
+ * 本文が多いスライド向けに、青ヘッダー帯を詰める。
+ * 既定は talk-content.vue の 30% / 2.1rem。段階はこの 2 つに限る。
+ */
+.slidev-layout.head-sm > h1 {
+  height: 22%;
+  font-size: 1.8rem;
+}
+.slidev-layout.head-xs > h1 {
+  height: 16%;
+  font-size: 1.6rem;
+}
+
+/* コードブロックの直前に置くファイルパスの見出し */
+.slidev-layout .code-caption {
+  font-size: 1rem;
+  margin: 0.3em 0;
+}
+.slidev-layout .code-caption + pre {
+  margin: 0.2em 0 0.6em;
+}
