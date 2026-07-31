@@ -211,14 +211,14 @@ runner という言葉はここで一度出しておき、STEP 3 の checkout �
 
 ---
 layout: talk-content
-class: code-xs head-xs
+class: code-sm head-xs
 ---
 
 # workflow YAML を読む
 
-`.github/workflows/hello-world.yml`
+<p class="code-caption"><code>.github/workflows/hello-world.yml</code></p>
 
-```yaml {all|1|2-6|8-12|14-15}
+```yaml {all|1|2-6|8-10|11-12|14-15}
 name: CI
 on:
   push:
@@ -236,13 +236,9 @@ jobs:
       - run: echo "Hello, World!"
 ```
 
-<style scoped>
-.talk-content p { font-size: 1rem; margin: 0.3em 0; }
-.talk-content pre { margin-top: 0.2em; }
-</style>
-
 <!--
-クリックで上から順に、名前・きっかけ・実行するマシン・実行する中身、と辿る。
+クリックで上から順に、名前・きっかけ・実行するマシン・権限・実行する中身、と辿る。
+permissions は「この job に与える権限」。checkout に必要な最小限だけ書いてある、と一言添える。
 題材リポジトリに最初から入っているファイルそのもの。
 ファイル名は hello-world.yml だが name: は CI。Actions タブに並ぶのは name: の値のほう、と一言添える。
 -->
@@ -325,23 +321,7 @@ class: head-sm
 
 # STEP 2 の手順
 
-- `.github/workflows/hello-world.yml` を開く
-- 鉛筆アイコンから編集する
-- `echo` の文字列を書き換え、step をもう 1 つ足す
-- `Commit directly to the main branch` を選んでコミット
-- Actions タブを開き、実行されたことを確認する
-  - 一覧に並ぶ名前は、ファイル名ではなく `name:` の値（`CI`）
-
-<!--
-作業中は表示しっぱなしにする。ブランチを切ると on: の条件から外れて動かないので、main への直接コミットを指定している。
--->
-
----
-layout: talk-content
-class: head-sm
----
-
-# STEP 2 の変更例
+<p class="code-caption"><code>.github/workflows/hello-world.yml</code></p>
 
 ```yaml
     steps:
@@ -349,16 +329,20 @@ class: head-sm
       - run: date
 ```
 
-<v-clicks>
+- 鉛筆アイコンから編集し、`steps` を上のように書き換える
+- `Commit directly to the main branch` を選んでコミットする
+- Actions タブを開き、実行されたことを確認する
+  - 一覧に並ぶ名前は、ファイル名ではなく `name:` の値（`CI`）
 
-- `run` に書いたコマンドが runner 上で実行される
-- step は上から順に実行される
-- step は好きなだけ並べられる
-
-</v-clicks>
+<style scoped>
+.talk-content ul li { font-size: 1.2rem; margin: 0.35em 0; }
+</style>
 
 <!--
+作業中は表示しっぱなしにする。手順と書き換える中身を 1 枚に載せているのはそのため。
+ブランチを切ると on: の条件から外れて動かないので、main への直接コミットを指定している。
 `date` を足すのは、step が複数並ぶことと、実行のたびに結果が変わることを同時に見せるため。
+run に書いたコマンドが runner 上で走ること、step が上から順に実行され、いくつでも並べられることは口頭で補う。
 -->
 
 ---
@@ -488,7 +472,7 @@ class: head-sm
 
 # STEP 3 の手順
 
-`.github/workflows/hello-world.yml`
+<p class="code-caption"><code>.github/workflows/hello-world.yml</code></p>
 
 ```yaml
     steps:
@@ -496,13 +480,11 @@ class: head-sm
       - run: cat README.md
 ```
 
-- `steps` を上のように書き換え、コミットする
+- `steps` を上のように書き換え、main へ直接コミットする
 - Actions タブで、README.md の中身が出力されたことを確認する
 - 余裕があれば `checkout` の行を消して、失敗を見てみる
 
 <style scoped>
-.talk-content p { font-size: 1rem; margin: 0.3em 0; }
-.talk-content pre { margin: 0.2em 0 0.6em; }
 .talk-content ul li { font-size: 1.2rem; margin: 0.35em 0; }
 </style>
 
@@ -578,7 +560,7 @@ class: code-xs head-xs
 <div class="two-column">
 <div class="column">
 
-新規作成: `.github/actions/greet/action.yml`
+<p class="code-caption">新規作成: <code>.github/actions/greet/action.yml</code></p>
 
 ```yaml
 name: greet
@@ -598,7 +580,7 @@ runs:
 </div>
 <div class="column">
 
-書き換え: `.github/workflows/hello-world.yml`
+<p class="code-caption">書き換え: <code>.github/workflows/hello-world.yml</code></p>
 
 ```yaml
     steps:
@@ -608,7 +590,8 @@ runs:
           name: GitHub Actions
 ```
 
-- composite の step には `shell` の指定が必要
+- 2 ファイルとも main へ直接コミットする
+- composite の `run` step には `shell` の指定が必要
 - リポジトリ内の action は `checkout` の後で呼ぶ
 
 </div>
@@ -617,8 +600,7 @@ runs:
 <style scoped>
 .talk-content .two-column { display: flex; gap: 1.6rem; }
 .talk-content .column { width: 50%; }
-.talk-content p { font-size: 0.95rem; margin: 0.2em 0; }
-.talk-content pre { margin: 0.2em 0 0.5em; }
+.talk-content .code-caption { font-size: 0.95rem; }
 .talk-content ul li { font-size: 0.95rem; margin: 0.3em 0; }
 </style>
 
