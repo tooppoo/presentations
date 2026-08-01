@@ -2,7 +2,6 @@
 defineProps({
   // frontmatter の step / time をそのまま受け取る
   step: { type: [Number, String], default: null },
-  time: { type: String, default: '' },
 })
 </script>
 
@@ -11,7 +10,6 @@ defineProps({
     <div class="talk-step__body">
       <div v-if="step !== null" class="talk-step__badge">STEP {{ step }}</div>
       <slot />
-      <div v-if="time" class="talk-step__time">目安 {{ time }}</div>
     </div>
     <PageNumber />
   </div>
@@ -65,9 +63,4 @@ defineProps({
   color: var(--talk-text);
 }
 
-.talk-step__time {
-  margin-top: 2rem;
-  font-size: 1rem;
-  color: var(--talk-text-subtle);
-}
 </style>

@@ -1,10 +1,8 @@
 ---
 theme: default
-title: GitHub Actions ハンズオン
+title: Gitつくる GitHub Actions
 info: |
-  fork したリポジトリで workflow を動かし、独自 action を作るまでの 45 分
-
-  開催が決まったら、表紙の日付と勉強会名を埋めること。
+  fork したリポジトリで workflow を動かし、独自 action を作るまで
 colorSchema: light
 aspectRatio: 16/9
 fonts:
@@ -21,9 +19,9 @@ layout: talk-cover
 
 ::info::
 
-2026-XX-XX
+2026-08-01
 
-勉強会名をここに
+みんなで持ち寄りハンズオン会！＠札幌
 
 @Philomagi
 
@@ -48,7 +46,7 @@ layout: talk-content
 
 <div v-click class="mt-2">
 
-> 「読める」「動かせる」「作れる」の 3 つを 45 分で通す
+> GitHub Actionsを「読める」「動かせる」「作れる」
 
 </div>
 
@@ -65,26 +63,23 @@ class: head-sm
 
 <div class="timetable">
 
-| | 内容 | 目安 |
-| --- | --- | --- |
-| 説明 | GitHub Actions の読み方 | 12 分 |
-| STEP 1 | リポジトリを fork する | 4 分 |
-| STEP 2 | hello-world.yml を動かす | 8 分 |
-| STEP 3 | README.md を出力する | 8 分 |
-| STEP 4 | 自分の action を作る | 7 分 |
-| 予備 | 質問、詰まったときの対応 | 6 分 |
+| | |
+| --- | --- |
+| 説明 | GitHub Actions の読み方 |
+| STEP 1 | リポジトリを fork する |
+| STEP 2 | hello-world.yml を動かす |
+| STEP 3 | README.md を出力する |
+| STEP 4 | 自分の action を作る |
 
 </div>
 
-- 各ステップは「説明を聞く」「各自で手を動かす」の順
-- 詰まったら手を挙げる。近くの人と相談してもよい
-
 <style scoped>
 .talk-content table {
-  width: 100%;
+  width: 50%;
   border-collapse: collapse;
   font-size: 1.05rem;
-  margin: 0.2em 0 0.6em;
+  margin-left: 0;
+  margin-top: 2rem;
 }
 .talk-content th, .talk-content td {
   border-bottom: 1px solid var(--talk-border);
@@ -110,7 +105,8 @@ class: head-sm
 - GitHub アカウント
 - ブラウザ
 - 作業はすべて GitHub の画面上で完結する
-  - ローカルに clone して進めたい場合の手順も手順書にある
+  - 題材リポジトリをforkして使用する
+  - ローカルに clone して進めてもOK
 
 <div class="mt-3 links">
 
@@ -138,7 +134,7 @@ layout: talk-content
 <v-clicks>
 
 - GitHub に組み込まれた、コマンドの実行環境
-- push や pull request をきっかけに動く
+- push や pull request をトリガーに動く
 - テスト、Lint、ビルド、デプロイの自動化に使われる
 - 何を実行するかは、リポジトリ内の YAML に書く
 
@@ -211,10 +207,10 @@ runner という言葉はここで一度出しておき、STEP 3 の checkout �
 
 ---
 layout: talk-content
-class: code-sm head-xs
+class: code-sm
 ---
 
-# workflow YAML を読む
+# STEP1: workflow YAML を読む
 
 <p class="code-caption"><code>.github/workflows/hello-world.yml</code></p>
 
@@ -246,7 +242,6 @@ permissions は「この job に与える権限」。checkout に必要な最小
 ---
 layout: talk-step
 step: 1
-time: 4 分
 ---
 
 # リポジトリを fork する
@@ -268,8 +263,6 @@ class: head-sm
   - `https://github.com/tooppoo/github-actions-hands-on`
 - 右上の `Fork` を押す
 - Owner を自分のアカウントにして `Create fork`
-- **Actions タブを開き、確認ボタンを押す**
-  - `I understand my workflows, go ahead and enable them`
 - 以降の作業は、すべて fork した側のリポジトリで行う
 
 <!--
@@ -278,32 +271,8 @@ class: head-sm
 -->
 
 ---
-layout: talk-content
-class: head-sm
----
-
-# なぜ有効化が要るのか
-
-- fork したリポジトリでは、workflow が最初は無効になっている
-  - 他人の書いた workflow が、fork した瞬間に動くのを防ぐため
-- Actions タブを開くと、確認ボタンが表示される
-- 押すまでは、push しても何も起きない
-
-<div class="mt-2">
-
-> fork 先で最初にやること
-
-</div>
-
-<!--
-ここを飛ばすと STEP 2 で全員が止まる。理由まで話すと、押し忘れたときに自力で気付ける。
-クリック送りにしないのは、作業直前の注意喚起を一覧で見せたいため。
--->
-
----
 layout: talk-step
 step: 2
-time: 8 分
 ---
 
 # hello-world.yml を動かす
@@ -329,8 +298,8 @@ class: head-sm
       - run: date
 ```
 
-- 鉛筆アイコンから編集し、`steps` を上のように書き換える
-- `Commit directly to the main branch` を選んでコミットする
+- `steps` を上のように書き換える
+- commit・pushする
 - Actions タブを開き、実行されたことを確認する
   - 一覧に並ぶ名前は、ファイル名ではなく `name:` の値（`CI`）
 
@@ -364,7 +333,7 @@ layout: talk-diagram
     </div>
     <div class="darrow">→</div>
     <div class="dcol">
-      <div class="dbox">job: check</div>
+      <div class="dbox">job: hello-world</div>
       <div class="dnote">runner 1 台分</div>
     </div>
     <div class="darrow">→</div>
@@ -392,7 +361,7 @@ layout: talk-content
 class: head-sm
 ---
 
-# 寄り道: いつ動くかを決める
+# 補足: 実行トリガー
 
 <v-clicks>
 
@@ -432,7 +401,7 @@ time: 8 分
 layout: talk-diagram
 ---
 
-# なぜ checkout が要るのか
+# actions/checkout を使ってみる
 
 <div class="dbody">
   <div class="flex items-start gap-6">
@@ -443,7 +412,7 @@ layout: talk-diagram
     <div class="darrow">→</div>
     <div class="dcol">
       <div class="dbox dbox--accent">actions/checkout</div>
-      <div class="dnote">step を 1 つ足すだけ</div>
+      <div class="dnote">checkoutを実行</div>
     </div>
     <div class="darrow">→</div>
     <div class="dcol">
@@ -451,13 +420,15 @@ layout: talk-diagram
       <div class="dnote">リポジトリの内容が置かれた状態</div>
     </div>
   </div>
-  <div class="dcaption">runner は毎回まっさらな状態で起動する</div>
+  <div v-click class="dcaption dcaption-first">runner は毎回まっさらな状態で起動する</div>
+  <div v-click class="dcaption">actions/checkout で runner にチェックアウトする</div>
 </div>
 
 <style scoped>
 .talk-diagram .dbox { font-size: 1.3rem; padding: 0.9rem 1.4rem; }
 .talk-diagram .darrow { margin-top: 0.9rem; }
-.talk-diagram .dcaption { font-size: 1.25rem; margin-top: 2rem; }
+.talk-diagram .dcaption-first { margin-top: 2rem; }
+.talk-diagram .dcaption { font-size: 1.25rem; }
 </style>
 
 <!--
@@ -501,9 +472,9 @@ layout: talk-content
 <v-clicks>
 
 - `uses: <owner>/<repo>@<ref>` の形で、公開された action を呼ぶ
-- action は GitHub Marketplace から探せる
-- `@v7` のようにバージョンを固定する
-- 固定しないと、action 側の更新で急に壊れることがある
+- action は GitHub Marketplace などから探せる
+- `@v7` のようにバージョンを固定するのがベター
+    - 固定しないと、action 側の更新で急に壊れることがある
 
 </v-clicks>
 
@@ -520,12 +491,11 @@ layout: talk-content
 ---
 layout: talk-step
 step: 4
-time: 7 分
 ---
 
 # 自分の action を作る
 
-action.yml を書いて、公開 action と同じ書き方で呼ぶ
+独自の action を書いて、呼び出す
 
 <!--
 最後のステップ。使う側から作る側に回る。ここは時間が押しても削らない。
@@ -542,6 +512,7 @@ layout: talk-content
 - 同じ step の並びを、複数の workflow で使い回したい
 - step のかたまりに名前を付けて、意図を示したい
 - composite action なら、YAML を書くだけで作れる
+  - JavaScript で action を定義する方法もある（今回は範囲外）
 - `actions/checkout` と同じ `<owner>/<repo>` の形で呼べる
 
 </v-clicks>
@@ -559,13 +530,10 @@ layout: talk-content
 
 ---
 layout: talk-content
-class: code-sm head-xs
+class: code-sm
 ---
 
-# STEP 4 の手順
-
-<div class="two-column step4">
-<div class="column">
+# STEP 4-1: 独自action定義
 
 <p class="code-caption">新規作成: リポジトリのルートに <code>action.yml</code></p>
 
@@ -579,8 +547,19 @@ runs:
       run: echo "Hello, GitHub Actions!"
 ```
 
-</div>
-<div class="column">
+- composite の `run` step には `shell` の指定が必要
+
+<style scoped>
+.talk-content .code-caption { font-size: 0.95rem; }
+.talk-content ul li { font-size: 0.95rem; margin: 0.3em 0; }
+</style>
+
+---
+layout: talk-content
+class: code-sm
+---
+
+# STEP 4-2: 独自action呼び出し
 
 <p class="code-caption">書き換え: <code>.github/workflows/hello-world.yml</code></p>
 
@@ -591,19 +570,11 @@ runs:
 
 - `<owner>` は自分の GitHub アカウント名
 - `action.yml` を先にコミットしてから workflow を書き換える
-- composite の `run` step には `shell` の指定が必要
 - `checkout` は要らない。action は GitHub 側から取得される
 
-</div>
-</div>
-
 <style scoped>
-.talk-content .two-column { display: flex; gap: 1.6rem; }
-.talk-content .column { width: 50%; }
 .talk-content .code-caption { font-size: 0.95rem; }
 .talk-content ul li { font-size: 0.95rem; margin: 0.3em 0; }
-/* 右カラムの uses は 1 行が長いので、この列だけさらに詰める */
-.talk-content .step4 .column:last-child pre { font-size: 12px !important; }
 </style>
 
 <!--
@@ -617,7 +588,7 @@ STEP 3 とちょうど裏返しになっているので、対比で説明する�
 
 ---
 layout: talk-content
-class: code-sm head-sm
+class: code-sm
 ---
 
 # 余裕があれば: action を増やす
@@ -653,18 +624,26 @@ layout: talk-content
 
 <v-clicks>
 
-- workflow は `on` と `jobs` と `steps` の 3 つで読める
-- runner はまっさらなマシン。ファイルが要るなら `checkout` する
+- workflow は `on` と `jobs` と `steps` の 3 つで最低限読める
+- runner はまっさらなマシン。リポジトリのファイルが要るなら `checkout` する
 - 公開された action は `uses` で呼び、バージョンを固定する
 - 自作の action も、同じ `<owner>/<repo>` の形で呼べる
 
 </v-clicks>
 
-<div v-click class="mt-2">
+---
+layout: talk-content
+---
 
-> 次に読むもの: action の inputs と outputs、reusable workflow、GitHub Actions 公式ドキュメント
+# Next Step
 
-</div>
+<v-clicks>
+
+- action の inputs / outputs
+- reusable workflow
+- GitHub Actions 公式ドキュメント
+
+</v-clicks>
 
 <!--
 今日作った action は値を受け取らない。引数を渡すのが inputs、結果を返すのが outputs。
