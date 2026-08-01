@@ -207,7 +207,7 @@ runner という言葉はここで一度出しておき、STEP 3 の checkout �
 
 ---
 layout: talk-content
-class: code-sm
+class: code-sm head-xs
 ---
 
 # STEP1: workflow YAML を読む
