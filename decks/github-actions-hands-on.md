@@ -1,6 +1,6 @@
 ---
 theme: default
-title: Gitつくる GitHub Actions
+title: 初めてつくる GitHub Actions
 info: |
   fork したリポジトリで workflow を動かし、独自 action を作るまで
 colorSchema: light
@@ -15,7 +15,7 @@ layout: talk-cover
 
 ::caption::
 
-# GitHub Actions ハンズオン
+# 初めてつくる GitHub Actions
 
 ::info::
 
