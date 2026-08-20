@@ -2,7 +2,7 @@
 theme: default
 title: skill と agent のコピペをやめる
 info: |
-  ゆるWeb勉強会@札幌 #31 — AI エージェントの skill / agent 定義を
+  ゆるWeb勉強会@札幌 #31 で話す、AI エージェントの skill / agent 定義を
   リポジトリ間で共有するための CLI、enozunu の紹介。
 colorSchema: light
 aspectRatio: 16/9
@@ -30,7 +30,7 @@ layout: talk-cover
 
 <style scoped>
   .hash {
-    color: cyan;
+    color: var(--talk-on-primary-accent);
     text-decoration: underline;
   }
 </style>
@@ -54,9 +54,9 @@ layout: talk-content
 <v-clicks>
 
 - AI エージェントに作法を仕込むためのファイル群
+  - プロジェクト直下の `.claude/` などに置くと、エージェントが読んでくれる
 - **skill**：手順書。「レビューはこう進める」を Markdown で書いておく
 - **agent**：役割を絞った下請け。専用の指示と道具を渡して呼び出す
-- プロジェクト直下の `.claude/` などに置くと、エージェントが読んでくれる
 
 </v-clicks>
 
@@ -96,8 +96,7 @@ layout: talk-content
 <v-clicks>
 
 - 便利な作法ほど、他のプロジェクトでも欲しくなる
-- レビューのループは、書いているものが何であれ効く
-- 衝突の検出も、リポジトリを選ばない
+- レビューのループも衝突の検出も、リポジトリを選ばない
 
 </v-clicks>
 
@@ -138,7 +137,7 @@ layout: talk-content
 - リポジトリが増えるたびにコピーが増える
 - 片方の skill を改善しても、もう片方は古いまま
 - 同じ名前の skill が、リポジトリごとに違う挙動をする
-- どれが原本なのか分からなくなる
+  - どれが原本なのか分からなくなる
 
 </v-clicks>
 
@@ -158,8 +157,7 @@ layout: talk-content
 
 - バージョン管理は、できている
   - 各リポジトリで git 管理されているし、履歴も残る
-- 足りないのは**同期の仕組み**
-- 更新を他へ配る手段が、コピペしかない
+- 足りないのは**同期の仕組み**。更新を他へ配る手段がコピペしかない
 
 </v-clicks>
 
@@ -194,12 +192,11 @@ step: 2
 layout: talk-content
 ---
 
-# なぜ devcontainer で動かしているか
+# AI エージェントは devcontainer の中にいる
 
 <v-clicks>
 
-- AI エージェントの作業を、コンテナの中に閉じ込めている
-- 壊れても rebuild すれば元に戻る
+- 作業をコンテナに閉じ込め、壊れても rebuild すれば元に戻るようにしている
 - 予期せぬ事故が起きうる前提で、取り返しがつく状態を先に作っておきたい
 
 </v-clicks>
@@ -225,15 +222,16 @@ layout: talk-content
 <v-clicks>
 
 - コンテナの中から、ホストのユーザーディレクトリは見えない
-- 隔離しているのだから、見えないのは当然
-- 事故を防ぐための境界が、そのまま skill の共有も塞ぐ
+- マウントすれば見えるが、それは隔離を薄くすることでもある
+- 事故を防ぐための境界が、そのまま skill の共有を塞ぐ
 
 </v-clicks>
 
 <!--
 ここが二段目の落差。
-devcontainer をやめれば解決するが、それは隔離を捨てることになる。
-どちらかを諦める話ではなく、別の置き場所が要るという話。
+devcontainer をやめる、あるいはホームディレクトリをマウントすれば解決はする。
+ただしどちらも、事故が起きても戻せるという前提を削る方向の解決になる。
+隔離を保ったまま共有したい、というのがここでの要求。
 -->
 
 ---
@@ -242,11 +240,11 @@ layout: talk-diagram
 
 # 境界の内と外
 
-<div class="flex flex-col items-center" style="gap:1.4rem;">
-  <div class="flex items-center justify-center gap-6">
+<div class="flex flex-col items-center" style="gap:1.8rem;">
+  <div class="flex items-center justify-center gap-8">
     <div class="zone">
       <div class="ztitle">ホスト</div>
-      <div class="dbox dbox--soft dbox--sm">~/.claude/skills</div>
+      <div class="dbox dbox--soft">~/.claude/skills</div>
     </div>
     <div class="dcol">
       <div class="darrow">✕</div>
@@ -254,7 +252,7 @@ layout: talk-diagram
     </div>
     <div class="zone">
       <div class="ztitle">devcontainer</div>
-      <div class="dbox dbox--accent dbox--sm">AI エージェント</div>
+      <div class="dbox dbox--accent">AI エージェント</div>
     </div>
   </div>
   <div class="dcaption" style="margin-top:0;">
@@ -269,18 +267,23 @@ layout: talk-diagram
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.9rem;
   border: 1.5px dashed var(--talk-border);
   border-radius: 12px;
-  padding: 1.1rem 1.4rem;
+  padding: 1.4rem 1.8rem;
 }
 .ztitle {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--talk-text-muted);
 }
-.dcol .darrow { font-size: 2.2rem; }
+.dcol .darrow { font-size: 3rem; }
+.dcol .dnote {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--talk-text-caption);
+}
 </style>
 
 <!--
@@ -306,6 +309,10 @@ layout: talk-content
 <!--
 要件として書き出すと4行で済む。
 最後の1行が効いていて、実体が捨てられるなら git 管理する理由もなくなる。
+
+質疑で出そうなので補足しておく。
+submodule でも近いことはできるが、実体がリポジトリの一部として残るので最後の1行を満たさない。
+また、Claude と Codex で置き場所が違うため、取得と配置を分けて書ける形が欲しかった。
 -->
 
 ---
@@ -322,56 +329,46 @@ layout: talk-content
 
 </v-clicks>
 
-<div v-click class="mt-3">
-
-> <https://github.com/tooppoo/enozunu>
-
-</div>
-
 <!--
 ようやくツールの話。
 役割は変換ではなく配置で、取ってきたものをそのまま置くだけ。
+URL は最後のスライドに出すので、ここでは読み上げない。
 -->
 
 ---
 layout: talk-content
-class: code-sm head-xs
+class: code-xs head-xs
 ---
 
 # enozunu.kdl
-
-<div class="code-caption">enozunu.kdl（このスライドのリポジトリから抜粋）</div>
 
 ```kdl
 enozunu config-version=1 {
   provider {
     skills {
-      skill "slidev" {
+      skill "subagent-review-loop" {
         git {
-          url "https://github.com/slidevjs/slidev"
+          url "https://github.com/tooppoo/catalog-agent-tools"
           branch "main"
-          path "skills/slidev"
+          path "common/skills/subagent-review-loop"
         }
       }
     }
   }
-
   consumer {
     claude {
-      use-skills "slidev"
-    }
-    codex {
-      use-skills "slidev"
+      use-skills "subagent-review-loop"
     }
   }
 }
 ```
 
 <!--
+4枚目で話したレビューのループが、この skill にあたる。
 provider が「どこから取ってくるか」、consumer が「どれを誰に渡すか」。
 取得元は git のほかに gist とローカルパスが書ける。
 agent も同じ形で、agents ブロックに宣言する。
-実際のこのリポジトリでは、skill を3つと agent を1つ宣言している。
+このリポジトリの実物では、skill を3つと agent を1つ宣言している。
 -->
 
 ---
@@ -383,8 +380,7 @@ layout: talk-content
 <v-clicks>
 
 - `enozunu summon` で、宣言された取得元を解決して展開する
-- 解決したコミットは `enozunu.lock.json` に記録される
-- `--update` で追従、`--frozen` で CI では解決させない
+- 解決したコミットは `enozunu.lock.json` に記録され、別のマシンでも同じものが展開される
 
 </v-clicks>
 
@@ -396,7 +392,8 @@ layout: talk-content
 
 <!--
 lock ファイルがあるので、branch 指定でも他のマシンで同じものが展開される。
-CI では frozen を付けて、lock に無いものを取りにいかないようにしている。
+追従したいときは --update を付けて lock を更新する。
+CI では --frozen を付けて、lock に無いものを取りに行かせないようにしている。
 -->
 
 ---
@@ -407,7 +404,7 @@ layout: talk-content
 
 <v-clicks>
 
-- `.claude` と `.agents` は、丸ごと `.gitignore` に入れた
+- `.claude` と `.agents`（Claude と Codex の展開先）を、丸ごと `.gitignore` に入れた
 - 展開されたファイルは生成物なので、リポジトリに置く理由がない
 - 消しても `summon` で戻る
 
@@ -428,8 +425,7 @@ layout: talk-content
 <v-clicks>
 
 - skill と agent の定義は、専用のリポジトリで一元管理するようになった
-- 同期の仕組みは、そもそも要らなくなった
-  - 各プロジェクトが原本を指しているため、配る作業が発生しない
+  - 各プロジェクトが原本を指すので、同期の仕組みはそもそも要らなくなった
 - 各プロジェクトへは、宣言定義だけをコピーして再利用している
 
 </v-clicks>
@@ -437,7 +433,7 @@ layout: talk-content
 <!--
 最初に欲しかった「同期の仕組み」は、作らずに済んだ。
 参照に変えたので、同期する対象が無くなった。
-ただし最後の1行のとおり、宣言ファイル自体のコピーは残っている。
+ただし2行目のとおり、宣言ファイル自体のコピーは残っている。
 -->
 
 ---
@@ -463,6 +459,7 @@ skill 本体のコピペは無くなったが、宣言ファイルには同じ�
 
 ---
 layout: talk-content
+class: head-xs
 ---
 
 # まとめ
@@ -472,17 +469,31 @@ layout: talk-content
 - 共通の作法をコピペで配ると、原本が分からなくなる
 - ユーザーディレクトリでの共有は、devcontainer の隔離と両立しない
 - 宣言だけを共有し、実体は生成物として捨てられるようにした
-- enozunu は、その置き場所と展開を引き受ける道具
 
 </v-clicks>
 
-<div v-click class="mt-3">
+<div v-click class="repo-link">
 
-> <https://github.com/tooppoo/enozunu>
+<https://github.com/tooppoo/enozunu>
 
 </div>
+
+<style scoped>
+.repo-link {
+  margin-top: 1.6rem;
+}
+.repo-link p {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.repo-link a {
+  color: var(--talk-primary-strong);
+  border-bottom: 2px solid var(--talk-border-soft);
+}
+</style>
 
 <!--
 skill と agent の管理をスムーズにするための道具として紹介した。
 同じ痛みを持っている人がいれば、試してもらえると嬉しい。
+質疑のあいだ、この画面を出したままにしておく。
 -->
