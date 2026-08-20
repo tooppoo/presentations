@@ -110,9 +110,9 @@ class: head-sm
 
 <div class="mt-3 links">
 
-題材リポジトリ: `https://github.com/tooppoo/github-actions-hands-on`
+題材リポジトリ: [https://github.com/tooppoo/github-actions-hands-on](https://github.com/tooppoo/github-actions-hands-on)
 
-手順書: `https://github.com/tooppoo/github-actions-hands-on/blob/main/docs/hands-on.md`
+手順書: [https://github.com/tooppoo/github-actions-hands-on/blob/main/docs/hands-on.md](https://github.com/tooppoo/github-actions-hands-on/blob/main/docs/hands-on.md)
 
 </div>
 
@@ -588,6 +588,51 @@ STEP 3 とちょうど裏返しになっているので、対比で説明する�
 
 ---
 layout: talk-content
+class: code-sm head-xs
+---
+
+# TypeScriptをビルドする
+
+<p class="code-caption">書き換え: <code>.github/workflows/hello-world.yml</code></p>
+
+```yaml
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+
+      - run: npm install
+      - run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: 'js-app'
+          path: dist
+
+```
+
+---
+layout: talk-content
+class: code-sm
+---
+
+# TypeScriptをビルドする（解説）
+
+<v-clicks>
+
+- リポジトリをチェックアウト
+- Node.jsをrunner にインストール
+- TypeScript や型定義ファイルをインストール
+- TypeScriptファイルをビルド
+- ビルドしたファイルをartifactとしてアップロード
+
+</v-clicks>
+
+
+---
+layout: talk-content
 class: code-sm
 ---
 
@@ -619,6 +664,38 @@ runs:
 ---
 layout: talk-content
 ---
+
+# 独自action定義例: E2Eテストランナーのセットアップ
+
+> https://github.com/tooppoo/reportage-actions/tree/main/setup
+
+<v-clicks>
+
+- バージョンの解決
+- ツールのインストール
+
+</v-clicks>
+
+---
+layout: talk-content
+---
+
+# 実際の利用例: Cloudflare Pagesへのデプロイ
+
+> https://github.com/tooppoo/ac6_assemble_tool/blob/main/.github/workflows/web-create-release.yml#L29-L54
+
+<v-clicks>
+
+- env fileの生成（L29-L35）
+- アプリケーションのビルド（L36-37）
+- Cloudflare Pagesへのデプロイ（L48-54）
+
+</v-clicks>
+
+---
+layout: talk-content
+---
+
 
 # まとめ
 
