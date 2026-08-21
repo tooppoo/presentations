@@ -37,6 +37,8 @@
   --talk-on-primary-soft: rgba(255, 255, 255, 0.92);
   --talk-on-primary-line: rgba(255, 255, 255, 0.5);
   --talk-on-primary-veil: rgba(255, 255, 255, 0.14);
+  /* primary 帯の上で一語だけ差し色にしたいとき（ハッシュタグなど） */
+  --talk-on-primary-accent: #d9fbff;
 
   /* border */
   --talk-border: #d2d7e0;
