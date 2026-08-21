@@ -69,14 +69,13 @@ Claude Code や Codex を使っていない人向けに、ここだけ用語を�
 layout: talk-content
 ---
 
-# skill を書いたら便利だった
+# Skill/Agent導入で嬉しいこと
 
 <v-clicks>
 
-- 修正 → subagent にレビューさせる → 再修正、のループを skill 化した
-  - このスライド自体もそのループで作っている
-- `git-kura` を使わせる skill で、並行作業の衝突をマージ前に検出させた
-- 一度書けば、毎回同じ指示を出さなくてよくなる
+- 修正 → subagent にレビューさせる → 再修正、のループを skill 化
+- `git-kura` を使わせる skill で、並行作業の衝突をマージ前に検出
+- AIにレビューサせる時、特定観点からのレビューを指示できる
 
 </v-clicks>
 
