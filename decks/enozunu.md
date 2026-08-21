@@ -75,7 +75,7 @@ layout: talk-content
 
 - 修正 → subagent にレビューさせる → 再修正、のループを skill 化
 - `git-kura` を使わせる skill で、並行作業の衝突をマージ前に検出
-- AIにレビューサせる時、特定観点からのレビューを指示できる
+- AIにレビューさせる時、特定観点からのレビューを指示できる
 
 </v-clicks>
 
@@ -90,18 +90,19 @@ git-kura のほうは、複数エージェントを並行で走らせたとき�
 layout: talk-content
 ---
 
-# 別のリポジトリでも使いたくなる
+# Skill/Agent再利用の問題
 
 <v-clicks>
 
-- 便利な作法ほど、他のプロジェクトでも欲しくなる
-- レビューのループも衝突の検出も、リポジトリを選ばない
+- 便利で汎用的なものほど、他のプロジェクトでも欲しくなる
+  - i.e. レビューループ、衝突の検出はプロジェクト非依存
+- プロジェクト固有ではないSkill/Agentsが溜まっていく
 
 </v-clicks>
 
 <div v-click class="mt-3">
 
-> プロジェクト固有ではない作法が、手元に溜まっていく
+> プロジェクト固有ではないSkill/Agentをどうやって共有するか
 
 </div>
 
@@ -116,71 +117,42 @@ layout: talk-step
 step: 1
 ---
 
-# コピペした
-
-`.claude/skills/` を、そのまま次のリポジトリへコピーする
-
-<!--
-最初にやったことを正直に言う。
-その場では動くし、5秒で終わる。
--->
+# コピー&ペースト
 
 ---
 layout: talk-content
 ---
 
-# その結果
+# コピー&ペーストの問題点
 
-<v-clicks>
-
-- リポジトリが増えるたびにコピーが増える
+- `.claude/skills/` や `.codex/skills` を、そのまま別のリポジトリへコピーする
+- 一番簡単な方法だが、リポジトリが増えるたびにコピーが増える
 - 片方の skill を改善しても、もう片方は古いまま
-- 同じ名前の skill が、リポジトリごとに違う挙動をする
-  - どれが原本なのか分からなくなる
-
-</v-clicks>
-
-<!--
-コピーが3つ4つになった頃から、どれを直せばいいのか分からなくなった。
-一番効いたのは、レビュー skill を改善したのに別のリポジトリでは古い基準でレビューされる状況。
-同じ名前なのに結果が違うので、原因の切り分けに時間を取られる。
--->
-
----
-layout: talk-content
----
-
-# コピペの何が嫌なのか
-
-<v-clicks>
-
-- バージョン管理は、できている
-  - 各リポジトリで git 管理されているし、履歴も残る
-- 足りないのは**同期の仕組み**。更新を他へ配る手段がコピペしかない
-
-</v-clicks>
-
-<div v-click class="mt-3">
-
-> 版が管理できないのではなく、版を揃える手段がない
-
-</div>
-
-<!--
-ここは誤解されやすいので明示的に否定しておく。
-git 管理から漏れているわけではない。
-各コピーはそれぞれ正しく履歴を持っている。
-問題は、それらのあいだに親子関係がないこと。
--->
+  - 「同じ名前の skill が、リポジトリごとに違う挙動をする」がありうる
+- どれが原本なのか分からなくなる
 
 ---
 layout: talk-step
 step: 2
 ---
 
-# ユーザーディレクトリに置けばいい
+# ユーザーディレクトリ
 
-`~/.claude/skills/` なら、全プロジェクトから見える
+---
+layout: talk-content
+---
+
+# ユーザーディレクトリにskill/agentを配置
+
+<v-clicks>
+
+- `~/.claude/skills/` など、ユーザーディレクトリ以下に配置する
+- 大抵のAIエージェントは、ユーザーディレクトリ以下のskill/agent定義も参照してくれる
+- これで解決するケースも多そうではあるが、問題もある
+  - 各プロジェクトがどのskill/agentを前提にしているか、わからなくなる
+  - devcontainer等、隔離技術との相性が微妙（後述）
+
+</v-clicks>
 
 <!--
 素直な解決策。
@@ -191,47 +163,31 @@ step: 2
 layout: talk-content
 ---
 
-# AI エージェントは devcontainer の中にいる
+# AI エージェントと devcontainer
 
 <v-clicks>
 
+- devcontainerを用意し、devcontainer内部でAIエージェントを実行
 - 作業をコンテナに閉じ込め、壊れても rebuild すれば元に戻るようにしている
+  - たまに見かける「AIエージェントがプロジェクト外の重要なファイルを壊してしまった」など
 - 予期せぬ事故が起きうる前提で、取り返しがつく状態を先に作っておきたい
 
 </v-clicks>
-
-<div v-click class="mt-3">
-
-> 不便だから使っているのではなく、隔離してほしくて使っている
-
-</div>
-
-<!--
-ここで前提を一つ挟む。
-エージェントに任せる範囲を広げるほど、想定外の操作が起きる確率は上がる。
-それを止める方向ではなく、起きても戻せる方向で対処している。
--->
 
 ---
 layout: talk-content
 ---
 
-# 壁
+# devcontainerとユーザーディレクトリの壁
 
 <v-clicks>
 
 - コンテナの中から、ホストのユーザーディレクトリは見えない
-- マウントすれば見えるが、それは隔離を薄くすることでもある
-- 事故を防ぐための境界が、そのまま skill の共有を塞ぐ
+- マウントすれば見えるが……
+  - 隔離の境界が薄くなる
+  - プロジェクト外のディレクトリ構成に依存
 
 </v-clicks>
-
-<!--
-ここが二段目の落差。
-devcontainer をやめる、あるいはホームディレクトリをマウントすれば解決はする。
-ただしどちらも、事故が起きても戻せるという前提を削る方向の解決になる。
-隔離を保ったまま共有したい、というのがここでの要求。
--->
 
 ---
 layout: talk-diagram
@@ -241,17 +197,17 @@ layout: talk-diagram
 
 <div class="flex flex-col items-center" style="gap:1.8rem;">
   <div class="flex items-center justify-center gap-8">
-    <div class="zone">
-      <div class="ztitle">ホスト</div>
-      <div class="dbox dbox--soft">~/.claude/skills</div>
+  <div class="zone">
+      <div class="ztitle">devcontainer</div>
+      <div class="dbox dbox--accent">AI エージェント</div>
     </div>
     <div class="dcol">
-      <div class="darrow">✕</div>
+      <div class="darrow">→</div>
       <div class="dnote">見えない</div>
     </div>
     <div class="zone">
-      <div class="ztitle">devcontainer</div>
-      <div class="dbox dbox--accent">AI エージェント</div>
+      <div class="ztitle">ホスト</div>
+      <div class="dbox dbox--soft">~/.claude/skills</div>
     </div>
   </div>
   <div class="dcaption" style="margin-top:0;">
@@ -285,23 +241,18 @@ layout: talk-diagram
 }
 </style>
 
-<!--
-図で見せたいのは、境界が一つあるという事実だけ。
-左の資産に右から手が届かない。
--->
-
 ---
 layout: talk-content
 ---
 
-# 欲しかったもの
+# skill/agent共有のために欲しかったもの
 
 <v-clicks>
 
 - 定義の原本は、一箇所だけ
 - 各プロジェクトには、どれを使うかの宣言だけを置く
-- 更新の反映は、コマンド一発
-- 展開された実体は、捨ててよいものにする
+- 原本更新の反映は、コマンド一発で済む
+- skill/agentの実体は、いつでも再取得・再配置できる（rebuildできる）
 
 </v-clicks>
 
@@ -323,16 +274,10 @@ layout: talk-content
 <v-clicks>
 
 - 宣言された取得元を、各エージェントのネイティブなパスへ展開する CLI
-- 名前は役小角から。鬼を使役したとされる役行者にあやかっている
-- Rust 製で、Claude と Codex に対応している
+- 名前は「役小角：という修験者から。鬼を使役したとされる逸話。
+- 今のところ、Claude と Codex に対応している
 
 </v-clicks>
-
-<!--
-ようやくツールの話。
-役割は変換ではなく配置で、取ってきたものをそのまま置くだけ。
-URL は最後のスライドに出すので、ここでは読み上げない。
--->
 
 ---
 layout: talk-content
@@ -362,14 +307,6 @@ enozunu config-version=1 {
 }
 ```
 
-<!--
-4枚目で話したレビューのループが、この skill にあたる。
-provider が「どこから取ってくるか」、consumer が「どれを誰に渡すか」。
-取得元は git のほかに gist とローカルパスが書ける。
-agent も同じ形で、agents ブロックに宣言する。
-このリポジトリの実物では、skill を3つと agent を1つ宣言している。
--->
-
 ---
 layout: talk-content
 ---
@@ -378,14 +315,16 @@ layout: talk-content
 
 <v-clicks>
 
-- `enozunu summon` で、宣言された取得元を解決して展開する
+- `enozunu summon` で、宣言的に定義された取得元を解決して展開する
 - 解決したコミットは `enozunu.lock.json` に記録され、別のマシンでも同じものが展開される
 
 </v-clicks>
 
 <div v-click class="mt-3">
 
-> 更新の反映が、コピー作業からコマンド一回になった
+> 更新の反映はコピー作業からコマンド一回へ
+> 
+> プロジェクトの前提となるskill/agentは宣言的に定義される
 
 </div>
 
@@ -399,33 +338,16 @@ CI では --frozen を付けて、lock に無いものを取りに行かせな�
 layout: talk-content
 ---
 
-# 生成物は gitignore する
-
-<v-clicks>
-
-- `.claude` と `.agents`（Claude と Codex の展開先）を、丸ごと `.gitignore` に入れた
-- 展開されたファイルは生成物なので、リポジトリに置く理由がない
-- 消しても `summon` で戻る
-
-</v-clicks>
-
-<!--
-ここが体験として一番変わったところ。
-それまで .claude はレビュー対象の一部だったが、今は見なくてよいものになった。
-diff に skill の中身が出てこなくなるだけでも、だいぶ静かになる。
--->
-
----
-layout: talk-content
----
-
 # 変わったこと
 
 <v-clicks>
 
+- `.claude` や `.codex`を丸ごと `.gitignore` に入れるようになった
+  - 展開されたファイルは生成物なので、リポジトリに置く理由がない
+  - 消しても `summon` で戻る
 - skill と agent の定義は、専用のリポジトリで一元管理するようになった
   - 各プロジェクトが原本を指すので、同期の仕組みはそもそも要らなくなった
-- 各プロジェクトへは、宣言定義だけをコピーして再利用している
+- 宣言定義だけをコピーして再利用している
 
 </v-clicks>
 
@@ -446,7 +368,7 @@ layout: talk-content
 - 宣言定義のコピーは、まだ手作業のまま残っている
 - リモート URL に置いた宣言を、ベースとして継承できるようにしたい
   - `tsconfig.json` の `extends` のイメージ
-- ベースを一箇所直せば、宣言を持つ全プロジェクトに効く
+- ベースを一箇所直せば、 `summon` 再実行で反映される
 
 </v-clicks>
 
@@ -466,7 +388,9 @@ class: head-xs
 <v-clicks>
 
 - 共通の作法をコピペで配ると、原本が分からなくなる
-- ユーザーディレクトリでの共有は、devcontainer の隔離と両立しない
+- ユーザーディレクトリでの共有も問題が残る
+  - プロジェクトの前提となるskill/agentがわからなくなる
+  - devcontainer などの隔離と両立しない
 - 宣言だけを共有し、実体は生成物として捨てられるようにした
 
 </v-clicks>
