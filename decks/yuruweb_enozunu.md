@@ -1,9 +1,8 @@
 ---
 theme: default
-title: skill と agent のコピペをやめる
+title: Skill/Agentを一元管理する
 info: |
-  ゆるWeb勉強会@札幌 #31 で話す、AI エージェントの skill / agent 定義を
-  リポジトリ間で共有するための CLI、enozunu の紹介。
+  ゆるWeb勉強会@札幌 #31 で話す、AI エージェントの skill / agent 定義を宣言的に記述するための CLI、enozunu の紹介。
 colorSchema: light
 aspectRatio: 16/9
 fonts:
@@ -16,7 +15,7 @@ layout: talk-cover
 
 ::caption::
 
-# skill と agent の<br>コピペをやめる
+# Skill/Agentを一元管理する
 
 ::info::
 
