@@ -235,8 +235,8 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@hono/node-server@1.19.14':
-    resolution: {integrity: sha512-GwtvgtXxnWsucXvbQXkRgqksiH2Qed37H9xHZocE5sA3N8O8O8/8FA3uclQXxXVzc9XBZuEOMK7+r02FmSpHtw==}
+  '@hono/node-server@1.19.17':
+    resolution: {integrity: sha512-dSneS5qhiauZWGDCeK4o695Xd9nUNjviSZCMQrj10eetr8Uln1ucn6bbphOM6UynAMMtNIzZNSpL9vnASJwrPQ==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -293,8 +293,8 @@ packages:
     resolution: {integrity: sha512-00aAZ0F0NLik6I6Yba2emGbHLxv+QYrPH00qQ5dFKXlAo1Ll2RHDXwY7nN2WAfrx2pP+WrvSRFTGFCNGdzBDHw==}
     engines: {node: '>=20.0.0'}
 
-  '@mermaid-js/parser@1.2.0':
-    resolution: {integrity: sha512-oYPyv8A4As1yH5Bx+04iQEQxXuIQDe0GKCNSRgao6z8AM9jixXIfP0vsppRLvGf+nKIOb9/LdpWA4YuJiVvESA==}
+  '@mermaid-js/parser@1.2.1':
+    resolution: {integrity: sha512-n12NohV3mrUyUL2o93IgG/ifeW9FTyeJn3zDxkhwa8MJ9Fxg3HQMlA3RiGmD/3UnJvheztkjjQAjA2T4LmUcpw==}
 
   '@modelcontextprotocol/sdk@1.29.0':
     resolution: {integrity: sha512-zo37mZA9hJWpULgkRpowewez1y6ML5GsXJPY8FI0tBBCd77HEvza4jDqRKOXgHNn867PVGCyTdzqpz0izu5ZjQ==}
@@ -1957,8 +1957,11 @@ packages:
     resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
     engines: {node: '>=8.6.0'}
 
-  fast-uri@3.1.4:
-    resolution: {integrity: sha512-8JnbkQ4juDyvYs4mgFGQqg4yCYtFDtUtmp2QIQq11ZZe5CFQ5wcqm1rqDgAh/QdMySuBnPzMUiJUNZG5N/AiQw==}
+  fast-uri@3.1.8:
+    resolution: {integrity: sha512-GZMtZUTNRpOVIECoXwLNZS5xUGE+mVNbTB8h/7Rwh2TFWcBQiPzTgyZi05BF9UMZKkLJv8XBRJTlU7zg8+ZfMg==}
+
+  fastdom@1.0.12:
+    resolution: {integrity: sha512-LB+xjSTEbjHE1cWsxu+tN2Xqr1kpi+V9aADI7sVM5ZMaXyYGPHULQMzpJMYqOTULK/73pUkWVzzObFRBkPr+hg==}
 
   fastq@1.20.1:
     resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
@@ -2110,8 +2113,8 @@ packages:
   hey-listen@1.0.8:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
 
-  hono@4.12.31:
-    resolution: {integrity: sha512-zJIHFrl6bq3RDd2YusFNCDlM8qUprxKswyi/OPzPyzKDdyBXDqWx8bZlZ7R+saTdSTatUmb3O7K4SspGPaEOQg==}
+  hono@4.13.9:
+    resolution: {integrity: sha512-7dMkQmZoC4E6F7AtaQSPhlWAdnBti+j7rreMZl8QB4jFiEhP9TWbGWUMi8WYzBCgmgulxuvLQupKqo+Co6Omyg==}
     engines: {node: '>=16.9.0'}
 
   hookable@5.5.3:
@@ -2175,8 +2178,8 @@ packages:
     resolution: {integrity: sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==}
     engines: {node: '>=12'}
 
-  ip-address@10.2.0:
-    resolution: {integrity: sha512-/+S6j4E9AHvW9SWMSEY9Xfy66O5PWvVEJ08O0y5JGyEKQpojb0K0GKpz/v5HJ/G0vi3D2sjGK78119oXZeE0qA==}
+  ip-address@10.7.2:
+    resolution: {integrity: sha512-7H/2gFSIitxc0hG3nOI1glS8QLo/EHBFFLk8vEUjXY/xu0AdL8jZ9U1IzO2PUm0d2D/ofQcAifb0g6OBkt8U7w==}
     engines: {node: '>= 12'}
 
   ip-regex@5.0.0:
@@ -2264,12 +2267,12 @@ packages:
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
-  js-yaml@3.15.0:
-    resolution: {integrity: sha512-ttBQIIQPDeLjpPOohtUdXuXUVoA2uIB6fEH9HyJ7234s5mBJ5wTx20njxplLZQgLaOfpmPQA7X2t5AX6tIPbog==}
+  js-yaml@3.15.2:
+    resolution: {integrity: sha512-6EuL879VkRA+1Cz578mKMiKvjPNEuk6+r1JaFzoSWejZmtf7xWbIyw1e3KkxlkzTIt9Taw6JBhEppG7utc1P+w==}
     hasBin: true
 
-  js-yaml@4.3.0:
-    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
+  js-yaml@4.3.2:
+    resolution: {integrity: sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==}
     hasBin: true
 
   jsesc@3.1.0:
@@ -2528,8 +2531,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  mermaid@11.16.0:
-    resolution: {integrity: sha512-Zvm3kbstgdpvIJPPItlL7fppIZ3kibvc1oZIGxdvk9t6UFz6flv+Jw7FtRGKwfcI8OckmH04LqG6LlS6X4B1pA==}
+  mermaid@11.17.2:
+    resolution: {integrity: sha512-V6K3C8EBdEsPFZXSKMJe6ppQOENxuHARr9GvHX4hh47lAbhMRD9qf4oEK7LoaRQxULMa80/qt5gHO73aCleBBg==}
 
   micromark-core-commonmark@2.0.3:
     resolution: {integrity: sha512-RDBrHEMSxVFLg6xvnXmb1Ayr2WzLAWjeSATAoxwKYJV94TeNavgoIdA0a9ytzDSVzBy2YKFK+emCPOEibLeCrg==}
@@ -2849,8 +2852,8 @@ packages:
     resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
     engines: {node: '>=6'}
 
-  qs@6.15.3:
-    resolution: {integrity: sha512-O9gl3zCl5h5blw1KGUzQKhA5oUXSl8rwUIM5o0S3nCXMliSvy5Dzx7/DJcI+SwgICv+IneSZwhBh1oSyEHA71A==}
+  qs@6.16.0:
+    resolution: {integrity: sha512-h6fhOIaRrID2CbEY2fqs+7t+UXZo+MLAnU5gRIq85uFtdiUPCdsApMlHhXogKVM4HM2DVbIjGNTTYH2OcmP1vA==}
     engines: {node: '>=0.6'}
 
   quansync@0.2.11:
@@ -3040,6 +3043,9 @@ packages:
   statuses@2.0.2:
     resolution: {integrity: sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==}
     engines: {node: '>= 0.8'}
+
+  strictdom@1.0.1:
+    resolution: {integrity: sha512-cEmp9QeXXRmjj/rVp9oyiqcvyocWab/HaoN4+bwFeZ7QzykJD6L3yD4v12K1x0tHpqRqVpJevN3gW7kyM39Bqg==}
 
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -3714,7 +3720,7 @@ snapshots:
   '@comark/markdown-it@0.3.4(@types/markdown-it@14.1.2)(markdown-it@14.3.0)':
     dependencies:
       '@types/markdown-it': 14.1.2
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       markdown-it: 14.3.0
 
   '@devframes/hub@0.5.4(devframe@0.5.4(@modelcontextprotocol/sdk@1.29.0(zod@3.25.76))(rolldown@1.1.5)(typescript@6.0.3)(vite@8.1.5(@types/node@22.20.1)(jiti@2.7.0)(yaml@2.9.0)))(rolldown@1.1.5)(vite@8.1.5(@types/node@22.20.1)(jiti@2.7.0)(yaml@2.9.0))':
@@ -3800,9 +3806,9 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@hono/node-server@1.19.14(hono@4.12.31)':
+  '@hono/node-server@1.19.17(hono@4.13.9)':
     dependencies:
-      hono: 4.12.31
+      hono: 4.13.9
 
   '@iconify-json/carbon@1.2.24':
     dependencies:
@@ -3866,13 +3872,13 @@ snapshots:
 
   '@mdit-vue/types@3.0.2': {}
 
-  '@mermaid-js/parser@1.2.0':
+  '@mermaid-js/parser@1.2.1':
     dependencies:
       '@chevrotain/types': 11.1.2
 
   '@modelcontextprotocol/sdk@1.29.0(zod@3.25.76)':
     dependencies:
-      '@hono/node-server': 1.19.14(hono@4.12.31)
+      '@hono/node-server': 1.19.17(hono@4.13.9)
       ajv: 8.20.0
       ajv-formats: 3.0.1(ajv@8.20.0)
       content-type: 1.0.5
@@ -3882,7 +3888,7 @@ snapshots:
       eventsource-parser: 3.1.0
       express: 5.2.1
       express-rate-limit: 8.6.0(express@5.2.1)
-      hono: 4.12.31
+      hono: 4.13.9
       jose: 6.2.3
       json-schema-typed: 8.0.2
       pkce-challenge: 5.0.1
@@ -4456,7 +4462,7 @@ snapshots:
       fuse.js: 7.5.0
       katex: 0.17.0
       lz-string: 1.5.0
-      mermaid: 11.16.0
+      mermaid: 11.17.2
       monaco-editor: 0.55.1
       nanotar: 0.3.0
       pptxgenjs: 4.0.1
@@ -4554,7 +4560,7 @@ snapshots:
       '@vitejs/plugin-vue': 6.0.8(vite@8.1.5(@types/node@22.20.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.3))
       '@vitejs/plugin-vue-jsx': 5.1.6(vite@8.1.5(@types/node@22.20.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.3))
       katex: 0.17.0
-      mermaid: 11.16.0
+      mermaid: 11.17.2
       monaco-editor: 0.55.1
       shiki: 4.3.1
       unocss: 66.7.5(vite@8.1.5(@types/node@22.20.1)(jiti@2.7.0)(yaml@2.9.0))
@@ -5182,7 +5188,7 @@ snapshots:
   ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.4
+      fast-uri: 3.1.8
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -5234,7 +5240,7 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.7.3
       on-finished: 2.4.1
-      qs: 6.15.3
+      qs: 6.16.0
       raw-body: 3.0.2
       type-is: 2.1.0
     transitivePeerDependencies:
@@ -5762,7 +5768,7 @@ snapshots:
     dependencies:
       debug: 4.4.3
       express: 5.2.1
-      ip-address: 10.2.0
+      ip-address: 10.7.2
     transitivePeerDependencies:
       - supports-color
 
@@ -5788,7 +5794,7 @@ snapshots:
       once: 1.4.0
       parseurl: 1.3.3
       proxy-addr: 2.0.7
-      qs: 6.15.3
+      qs: 6.16.0
       range-parser: 1.3.0
       router: 2.2.0
       send: 1.2.1
@@ -5815,7 +5821,11 @@ snapshots:
       merge2: 1.4.1
       micromatch: 4.0.8
 
-  fast-uri@3.1.4: {}
+  fast-uri@3.1.8: {}
+
+  fastdom@1.0.12:
+    dependencies:
+      strictdom: 1.0.1
 
   fastq@1.20.1:
     dependencies:
@@ -5928,7 +5938,7 @@ snapshots:
 
   gray-matter@4.0.3:
     dependencies:
-      js-yaml: 3.15.0
+      js-yaml: 3.15.2
       kind-of: 6.0.3
       section-matter: 1.0.0
       strip-bom-string: 1.0.0
@@ -5970,7 +5980,7 @@ snapshots:
 
   hey-listen@1.0.8: {}
 
-  hono@4.12.31: {}
+  hono@4.13.9: {}
 
   hookable@5.5.3: {}
 
@@ -6024,7 +6034,7 @@ snapshots:
 
   internmap@2.0.3: {}
 
-  ip-address@10.2.0: {}
+  ip-address@10.7.2: {}
 
   ip-regex@5.0.0: {}
 
@@ -6084,12 +6094,12 @@ snapshots:
 
   js-tokens@4.0.0: {}
 
-  js-yaml@3.15.0:
+  js-yaml@3.15.2:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
 
-  js-yaml@4.3.0:
+  js-yaml@4.3.2:
     dependencies:
       argparse: 2.0.1
 
@@ -6415,11 +6425,11 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  mermaid@11.16.0:
+  mermaid@11.17.2:
     dependencies:
       '@braintree/sanitize-url': 7.1.2
       '@iconify/utils': 3.1.4
-      '@mermaid-js/parser': 1.2.0
+      '@mermaid-js/parser': 1.2.1
       '@types/d3': 7.4.3
       '@upsetjs/venn.js': 2.0.0
       cytoscape: 3.34.0
@@ -6431,6 +6441,7 @@ snapshots:
       dayjs: 1.11.21
       dompurify: 3.4.12
       es-toolkit: 1.49.0
+      fastdom: 1.0.12
       katex: 0.16.47
       khroma: 2.1.0
       marked: 16.4.2
@@ -6891,7 +6902,7 @@ snapshots:
 
   punycode.js@2.3.1: {}
 
-  qs@6.15.3:
+  qs@6.16.0:
     dependencies:
       es-define-property: 1.0.1
       side-channel: 1.1.1
@@ -7119,6 +7130,8 @@ snapshots:
   statuses@1.5.0: {}
 
   statuses@2.0.2: {}
+
+  strictdom@1.0.1: {}
 
   string-width@4.2.3:
     dependencies:
